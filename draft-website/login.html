@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Login Page</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .form-container {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container form-container">
+    <h2 class="text-center">Login</h2>
+    <form id="signupForm" onsubmit="storeUserInfoAndRedirect(event)">
+        <div class="form-group">
+            <input type="text" class="form-control" id="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="firstName" placeholder="First Name">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Signup</button>
+    </form>
+</div>
+
+<!-- libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    //storing user info in local storage, need DB in future, and redirecting to main page
+    function storeUserInfoAndRedirect(event) {
+        event.preventDefault(); // Prevent the form from submitting
+
+        const username = document.getElementById("username").value;
+        const firstName = document.getElementById("firstName").value;
+        const lastName = document.getElementById("lastName").value;
+        const email = document.getElementById("email").value;
+
+        const userInfo = `Username: ${username}, First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}`; //putting it into userInfo
+
+        localStorage.setItem("userInfo", userInfo); //saving
+
+        //sending user to main.html
+        window.location.href = "main.html";
+    }
+</script>
+</body>
+</html>
