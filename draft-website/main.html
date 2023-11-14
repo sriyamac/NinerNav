@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Gentium+Book+Plus&family=Gugi&family=Inconsolata&family=Itim&family=Julee&family=Knewave&family=Overpass&family=Silkscreen&family=Space+Mono&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>NinerNav</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #63765A;
+            color: #63765A;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer {
+            margin-top: auto;
+        }
+        .banner {
+            background-color: #A49664;
+            padding: 20px;
+            
+        }
+        .banner h1 {
+            color: white;
+        }
+        h1{
+            font-family: 'Black Ops One', cursive;
+            font-size: 50px;
+        }
+        .login-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #85bb65;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            
+        }
+        .login-btn:hover {
+            background-color: #63765A;
+        }
+        /*displaying user info*/
+        #displayUserInfo { 
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <script src="components/header.js"></script>
+<div class="container flex-grow-1">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="btn-group-vertical">
+                <button type="button" class="btn btn-success mt-3">Change Difficulty</button> 
+                <button type="button" class="btn btn-success mt-3">Change Game Mode</button> 
+                <button type="button" class="btn btn-success mt-3">View LeaderBoard</button> 
+            </div>
+        </div>
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-2 text-right">
+            <button type="button" class="btn btn-secondary mt-3" id="loginButton" onclick="redirectToLogin()">Login</button>
+            <div id="displayUserInfo" class="text-center"></div>
+        </div>
+    </div>
+</div>
+
+<div class="footer text-center">
+    <button type="button" class="btn btn-success btn-lg mb-3" onclick="redirectToGameScreen()">Go</button>
+</div>
+
+<!-- libraries -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    //redirct to login page
+    function redirectToLogin() {
+        window.location.href = "login.html";
+    }
+
+    //display user information
+    function displayUserInfo() {
+        //locally stored user info for now, need DB in future
+        const userInfo = localStorage.getItem("userInfo");
+
+        //display functionality 
+        if (userInfo) {
+            const userInfoLines = userInfo.split(', ').join('<br>'); //formating, creating separate lines for each user credential 
+            document.getElementById("displayUserInfo").innerHTML = `<h4>User Info:</h4><p>${userInfoLines}</p>`;
+        } else {
+            document.getElementById("displayUserInfo").innerText = "No user info available.";
+        }
+    }
+
+    //when page loads, automatically displays user info
+    displayUserInfo();
+
+    //redirect to game screen 
+    function redirectToGameScreen() {
+        //if the user is logged in, then go button is functional
+        const userInfo = localStorage.getItem("userInfo");
+        if (userInfo) {
+            window.location.href = "gamescreen.html";
+        } else {
+            alert("Please login/signup first.");
+        }
+    }
+</script>
+</body>
+</html>
