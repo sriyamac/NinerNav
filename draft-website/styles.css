@@ -63,3 +63,38 @@ a:active
 {
 color: #CA2E55;
 }
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.leaderboard {
+    width: 70%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.leaderboard-entry {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.load-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #85bb65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.load-more-btn:hover {
+    background-color: #63765A;
+}
