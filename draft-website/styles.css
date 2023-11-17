@@ -3,8 +3,8 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #63765A;
-    color: #63765A;
+    background-color: #899064;
+    color: #101820;
 }
 body {
     display: flex;
@@ -14,7 +14,7 @@ body {
     margin-top: auto;
 }
 .banner {
-    background-color: #A49664;
+    background-color: #F1E6B2;
     padding: 20px;
     
 }
@@ -48,7 +48,7 @@ h1{
 }
 a 
 {
-color: #802F2D;
+color: #007377;
 text-align: center;
 text-decoration: none;
 font-weight: bold;
@@ -97,4 +97,12 @@ color: #CA2E55;
 }
 .load-more-btn:hover {
     background-color: #63765A;
+}
+.bx-wrapper {
+	margin-bottom: 20px;
+}
+#pager {
+	text-align: center;
+	font-size: 90%;
+	color: blue;
 }
