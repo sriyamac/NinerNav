@@ -146,3 +146,68 @@ color: #CA2E55;
     margin-top: 10px;
     padding: 10px;
 }
+
+#result-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.image-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.title {
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.fun-facts {
+    flex: 0 0 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-text {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Added styles for side-by-side buttons with padding */
+.action-buttons button:first-child {
+    margin-right: 10px;
+}
