@@ -4,37 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Gentium+Book+Plus&family=Gugi&family=Inconsolata&family=Itim&family=Julee&family=Knewave&family=Overpass&family=Silkscreen&family=Space+Mono&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Gentium+Book+Plus&family=Gugi&family=Inconsolata&family=Itim&family=Julee&family=Knewave&family=Overpass&family=Silkscreen&family=Space+Mono&family=Tilt+Neon&display=swap" rel="stylesheet">
+    <script src="components/slider.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        img {
+            height: 300px;
+            display: none;
+        }
+    </style>
+
     <title>NinerNav | Home Page</title>
 </head>
 <body>
     <script src="components/header.js"></script>
-<div class="container flex-grow-1">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="btn-group-vertical">
-                <button type="button" class="btn btn-success mt-3">Change Difficulty</button> 
-                <button type="button" class="btn btn-success mt-3">Change Game Mode</button> 
-                <button type="button" class="btn btn-success mt-3">View LeaderBoard</button> 
+
+    <div class="container flex-grow-1">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="btn-group-vertical">
+                    <button type="button" class="btn btn-success mt-3">Change Difficulty</button> 
+                    <button type="button" class="btn btn-success mt-3">Change Game Mode</button> 
+                    <button type="button" class="btn btn-success mt-3">View LeaderBoard</button> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id="imageSlider">
+                    <img src="images/homepage_atkins.jpg" title="Atkins" height="250">
+                    <img src="images/homepage_bench.jpg" title="Bench" height="250">
+                    <img src="images/homepage_starquad.jpg" title="Star Quad" height="250">
+                    <img src="images/homepage_union.jpg" title="Student Union" height="250">
+                    <img src="images/homepage_woodward.jpg" title="Woodward" height="250">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-secondary mt-3" id="loginButton" onclick="redirectToLogin()">Login</button>
+                <div id="displayUserInfo" class="text-center"></div>
             </div>
         </div>
-        <div class="col-md-8">
-        </div>
-        <div class="col-md-2 text-right">
-            <button type="button" class="btn btn-secondary mt-3" id="loginButton" onclick="redirectToLogin()">Login</button>
-            <div id="displayUserInfo" class="text-center"></div>
-        </div>
     </div>
-</div>
+   
+
 
 <div class="footer text-center">
     <button type="button" class="btn btn-success btn-lg mb-3" onclick="redirectToGameScreen()">Go</button>
 </div>
 
-<!-- libraries -->
+<!-- Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

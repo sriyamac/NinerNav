@@ -211,3 +211,8 @@ color: #CA2E55;
 .action-buttons button:first-child {
     margin-right: 10px;
 }
+#imageSlider {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
