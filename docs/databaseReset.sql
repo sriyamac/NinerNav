@@ -3,7 +3,7 @@ CREATE DATABASE ninernav;
 
 USE ninernav;
 
-CREATE TABLE User (
+CREATE TABLE user (
 	id			MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT,
     username	VARCHAR(100) UNIQUE NOT NULL,
     email		VARCHAR(100) UNIQUE NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE User (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Map (
+CREATE TABLE map (
 	id			SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     name		VARCHAR(100) UNIQUE NOT NULL,
     latitude	DOUBLE NOT NULL,
@@ -20,33 +20,33 @@ CREATE TABLE Map (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Score (
+CREATE TABLE score (
 	id		    INT UNSIGNED NOT NULL AUTO_INCREMENT,
 	userid		MEDIUMINT UNSIGNED NOT NULL,
     mapid		SMALLINT UNSIGNED NOT NULL,
     score		SMALLINT NOT NULL,
     time		TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (userid) REFERENCES User(id),
-    FOREIGN KEY (mapid) REFERENCES Map(id)
+    FOREIGN KEY (userid) REFERENCES user(id),
+    FOREIGN KEY (mapid) REFERENCES map(id)
 );
 
 -- Generate some dummy data for the tables
-INSERT INTO User (username, email, password)
+INSERT INTO user (username, email, password)
 VALUES
 	('a', 'a@example.com', '$argon2id$v=19$m=65536,t=3,p=4$CKADhmoj5NhfVoe+wfbFvw$h6PX2TSy9/t1QZaQ1BIpffSX6NSuAmpLA9c9ShxOAqA'),
 	('b', 'b@example.com', '$argon2id$v=19$m=65536,t=3,p=4$raLdPgfD+krGBUoXoSFaVA$r26NkGLYAjDI4Bc9TEN6Usqz3RJ3P9LheAgv+VpUtHc'),
     ('c', 'c@example.com', '$argon2id$v=19$m=65536,t=3,p=4$EuVxKIUDNsmY/ENHfiARzQ$TM8+SXlbdsL50wZ4hXcQzVwgguVq9GAXm0p7bQwHw2M');
 
-INSERT INTO Map (name, longitude, latitude, imgpath)
+INSERT INTO map (name, longitude, latitude, imgpath)
 VALUES
 	('Null Island', 0, 0, '/dev/null'),
     ('Full Island', 1, 1, '/dev/full'),
     ('Random Island', 0.4019647391215304, 0.830638956196776, '/dev/urandom');
 
-INSERT INTO Score (userid, mapid, score)
+INSERT INTO score (userid, mapid, score)
 VALUES
-	(0, 0, 1),
-    (0, 1, 2),
-    (1, 0, 3),
-    (2, 1, 10);
+	(1, 1, 1),
+    (1, 2, 2),
+    (2, 1, 3),
+    (3, 2, 10);
