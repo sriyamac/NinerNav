@@ -25,11 +25,26 @@
 
     <div class="container flex-grow-1">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2 rounded-container">
                 <div class="btn-group-vertical">
-                    <button type="button" class="btn btn-success mt-3">Change Difficulty</button> 
-                    <button type="button" class="btn btn-success mt-3">Change Game Mode</button> 
-                    <button type="button" class="btn btn-success mt-3">View LeaderBoard</button> 
+                    <!-- Change Difficulty Button -->
+                    <button type="button" class="btn btn-success mt-3 main-btn" id= "difficultyButton">Change Difficulty</button>
+                    <div id="difficultySubButtons" style="display: none;">
+                        <button type="button" class="btn btn-success sub-btn">Beginner</button>
+                        <button type="button" class="btn btn-success sub-btn">Medium</button>
+                        <button type="button" class="btn btn-success sub-btn">Expert</button>
+                    </div>
+    
+                    <!-- Change Game Mode Button -->
+                    <button type="button" class="btn btn-success mt-3 main-btn" id="gameButton">Change Game Mode</button>
+                    <div id="gameModeSubButtons"  style="display: none;">
+                        <button type="button" class="btn btn-success sub-btn">Regular</button>
+                        <button type="button" class="btn btn-success sub-btn">Timed</button>
+                        <button type="button" class="btn btn-success sub-btn">Sight Seeing</button>
+                    </div>
+    
+                    <!-- View Leaderboard Button -->
+                    <button type="button" class="btn btn-success mt-3" onclick="redirectToLeaderboard()">View LeaderBoard</button> 
                 </div>
             </div>
             <div class="col-md-6">
@@ -42,8 +57,19 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <button type="button" class="btn btn-secondary mt-3" id="loginButton" onclick="redirectToLogin()">Login</button>
-                <div id="displayUserInfo" class="text-center"></div>
+                <div class = "container rounded-container"> 
+                    <div id="loginSection"
+                    <h1 class="text-center"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
+                            <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
+                            <input type="password" class="form-control mt-3" placeholder="Password" id="password">
+                        <button type="button" class="btn btn-secondary mt-3" id="signInButton">Sign In</button> 
+                    
+                    
+                    <h4 class="text-center" style="padding-top: 20px;">------------</h4>
+
+                    <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
+                    <!-- <div id="displayUserInfo" class="text-center"></div> -->
+                </div>
             </div>
         </div>
     </div>
@@ -60,27 +86,59 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
+
+    /* to hide subbuttons until user clicks on main button */
+    const difficultyButton = document.getElementById('difficultyButton');
+    const difficultySubButtons = document.getElementById('difficultySubButtons');
+
+        difficultyButton.addEventListener('click', function() {
+            if (difficultySubButtons.style.display === 'none') {
+                difficultySubButtons.style.display = 'block';
+            } else {
+                difficultySubButtons.style.display = 'none';
+            }
+        });
+
+    const gameButton = document.getElementById('gameButton');
+    const gameModeSubButtons = document.getElementById('gameModeSubButtons');
+
+    gameButton.addEventListener('click', function() {
+        if (gameModeSubButtons.style.display === 'none') {
+            gameModeSubButtons.style.display = 'block';
+        } else {
+            gameModeSubButtons.style.display = 'none';
+        }
+    });
+
+
+
+
+    // Redirect to leaderboard page
+    function redirectToLeaderboard() {
+        window.location.href = "leaderboard.html";
+    }
+
     //redirct to login page
-    function redirectToLogin() {
+    function redirectToSignUp() {
         window.location.href = "login.html";
     }
 
     //display user information
-    function displayUserInfo() {
-        //locally stored user info for now, need DB in future
-        const userInfo = localStorage.getItem("userInfo");
+    // function displayUserInfo() {
+    //     //locally stored user info for now, need DB in future
+    //     const userInfo = localStorage.getItem("userInfo");
 
-        //display functionality 
-        if (userInfo) {
-            const userInfoLines = userInfo.split(', ').join('<br>'); //formating, creating separate lines for each user credential 
-            document.getElementById("displayUserInfo").innerHTML = `<h4>User Info:</h4><p>${userInfoLines}</p>`;
-        } else {
-            document.getElementById("displayUserInfo").innerText = "No user info available.";
-        }
-    }
+    //     //display functionality 
+    //     if (userInfo) {
+    //         const userInfoLines = userInfo.split(', ').join('<br>'); //formating, creating separate lines for each user credential 
+    //         document.getElementById("displayUserInfo").innerHTML = `<h4>User Info:</h4><p>${userInfoLines}</p>`;
+    //     } else {
+    //         document.getElementById("displayUserInfo").innerText = "No user info available.";
+    //     }
+    // }
 
     //when page loads, automatically displays user info
-    displayUserInfo();
+    // displayUserInfo();
 
     //redirect to game screen 
     function redirectToGameScreen() {
