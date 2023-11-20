@@ -7,7 +7,8 @@ document.addEventListener("DOMContentLoaded", function() {
         <a href="main.html">Home Page</a> |
         <a href="login.html">Login</a> |
         <a href="gamepage.html">Game Page</a> |
-        <a href="leaderboard.html">Leaderboard</a>
+        <a href="leaderboard.html">Leaderboard</a> |
+        <a href="resultpage.html">Result Page</a>
       </nav>
     </div>
       <br>
