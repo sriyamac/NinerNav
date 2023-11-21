@@ -31,5 +31,21 @@ def signup_post():
     else:
         return "Users already existed"
 
+@app.get("/login")
+def login_get():
+    return render_template("login.html")
+
+@app.post("/login")
+def login_post():
+    try:
+        user = session.login_user(request)
+    except ValueError:
+        return "Invalid info"
+
+    if user:
+        return "Signed in"
+    else:
+        return "Sign in failed"
+
 if __name__ == "__main__":
     app.run()

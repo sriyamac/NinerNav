@@ -1,19 +1,15 @@
 {% extends 'common.html' %}
 
 {% block head %}
-    <title>Sign Up</title>
+    <title>Log In</title>
 {% endblock%}
 
 {% block body %}
-    <h1>Sign Up</h1>
-    <form action="/signup" method="POST">
+    <h1>Log In</h1>
+    <form action="/login" method="POST">
         <div>
             <label for="username">Username</label>
             <input name="username" type="text">
-        </div>
-        <div>
-            <label for="email">Email</label>
-            <input name="email" type="email">
         </div>
         <div>
             <label for="password">Password</label>
@@ -21,4 +17,12 @@
         </div>
         <button>Submit</button>
     </form>
+    <script>
+        /* Temporary debugging code */
+        document.addEventListener("DOMContentLoaded", () => {
+            let x = document.querySelector("form");
+            x.username.value = 'a';
+            x.password.value = 'a';
+        });
+    </script>
 {% endblock%}
