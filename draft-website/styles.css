@@ -25,6 +25,12 @@ h1{
     font-family: 'Black Ops One', cursive;
     font-size: 50px;
 }
+.slider-style{
+    height: 300px;
+    display: none;
+    border: 2px solid #555;
+    border-radius: 5%;
+}
 .login-btn {
     padding: 10px 20px;
     border: none;

@@ -9,14 +9,6 @@
     <script src="components/slider.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <style>
-        img {
-            height: 300px;
-            display: none;
-            border: 2px solid #555;
-            border-radius: 5%;
-        }
-    </style>
 
     <title>NinerNav | Home Page</title>
 </head>
@@ -48,7 +40,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div id="imageSlider">
+                <div class = "slider-style" id="imageSlider">
                     <img src="images/homepage_atkins.jpg" title="Atkins" height="250">
                     <img src="images/homepage_bench.jpg" title="Bench" height="250">
                     <img src="images/homepage_starquad.jpg" title="Star Quad" height="250">
@@ -58,7 +50,7 @@
             </div>
             <div class="col-md-2">
                 <div class = "container rounded-container"> 
-                    <div id="loginSection"
+                    <div id="loginSection">
                     <h1 class="text-center"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
                             <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
                             <input type="password" class="form-control mt-3" placeholder="Password" id="password">
