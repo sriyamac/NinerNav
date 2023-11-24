@@ -1,12 +1,16 @@
 """A set of functions and classes to manage user sessions and authentication.
 
-This file has funcitons to handle sign ups, log ins, and tracking user sessions. This file also
-includes the User class, which enables storing information about sessions in a consistent format.
+This file has funcitons to handle sign ups, log ins, and tracking user sessions. The keys added to
+the session object are listed below.
+
+* authenticated (bool) - true if the user is authenticated, false otherwise
+* username (str) - the user's username
 """
-from flask import request, Request
+from flask import Request, session
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from sqlalchemy.exc import IntegrityError
+import re
 from .models import user as user_model, models
 
 _ph = PasswordHasher()
@@ -23,29 +27,11 @@ def signup_user(request: Request) -> models.User|None:
     Returns:
         The user if the signup was successful
         None if the signup was unsuccessful
-
-    Raises:
-        ValueError: request.form did not have a username, email, or password key or the provided
-            data is invalid
     """
-    # TODO: add CSRF protection
-
     # Get the username, email, and password
     username = request.form.get("username")
     email = request.form.get("email")
     password = request.form.get("password")
-
-    # Validate the data
-    if username == None or email == None or password == None:
-        raise ValueError
-
-    if len(username) > 100 or len(email) > 100:
-        raise ValueError
-
-    if not _is_valid_email(email):
-        raise ValueError
-
-    # TODO: create and enforce password requirements
 
     # Create the user, if possible
     try:
@@ -65,23 +51,10 @@ def login_user(request: Request) -> models.User|None:
     Returns:
         The user if the login was successful
         None if the login was unsuccessful
-
-    Raises:
-        ValueError: request.form did not have a username or password key or the provided
-            data is invalid
     """
-    # TODO: add CSRF protection
-
     # Get the username and password
     username = request.form.get("username")
     password = request.form.get("password")
-
-    # Validate the data
-    if username == None or password == None:
-        raise ValueError
-
-    if len(username) > 100:
-        raise ValueError
 
     # Get the user by username if they exist
     user = user_model.get_user_by_username(username)
@@ -99,6 +72,10 @@ def login_user(request: Request) -> models.User|None:
     if _ph.check_needs_rehash(user.password):
         user_model.update_user_password(user, _ph.hash(password))
 
+    # Mark the user's session as authenticated
+    session["authenticated"] = True
+    session["username"] = username
+
     # User is authenticated, return them
     return user
 
@@ -115,58 +92,7 @@ def validate_user(request: Request) -> bool:
         True if the request is authenticated
         False if the request is unauthenticated
     """
-    return False
-
-class Session:
-    """Holds information about a session in a consistent format.
-
-    All information about a session should be stored here, including whether a session is
-    authenticated, what their username is, and what their high score is.
-
-    Attributes:
-        is_authenticated: A boolean indicating if a session is authenticated
-        username: A string indicating the user's username. None if the session is unauthenticated
-    """
-
-    def __init__(self, is_authenticated: bool=False, username: str|None=None):
-        """Initializes the instance. The parameter defaults should only be overriden in extreme
-        cases.
-
-        Args:
-            is_authenicated: Determines if a session is authenticated
-            username: The username of the user of the session
-        """
-        self.is_authenticated = is_authenticated
-        self.username = username
-
-def _is_valid_email(email: str) -> bool:
-    """Determines if a given email is valid.
-
-    Args:
-        email: The email to validate
-
-    Returns:
-        True if the email is valid
-        False if the email is invalid
-    """
-    # Verify that exactly one '@' is present
-    if email.count("@") != 1:
+    if "authenticated" not in session:
         return False
 
-    # Verify that at least one '.' is present
-    if email.count(".") == 0:
-        return False
-
-    at_index = email.rfind("@")
-    dot_index = email.rfind('.')
-
-    # Verify that '@' is not the first character
-    if at_index == 0:
-        return False
-
-    # Verify that '.' is not the last character
-    if dot_index == len(email) - 1:
-        return False
-
-    # Verify that there is a dot is after '@'
-    return at_index < dot_index
+    return session["authenticated"]

@@ -6,23 +6,19 @@
 
 {% block body %}
     <h1>Log In</h1>
+
+    {% if form.username.errors or form.password.errors %}
+    <div class="errors">Invalid information.</div>
+    {% endif %}
+
     <form action="/login" method="POST">
+        {{ form.csrf_token }}
         <div>
-            <label for="username">Username</label>
-            <input name="username" type="text">
+            {{ form.username.label }} {{ form.username(size=20) }}
         </div>
         <div>
-            <label for="password">Password</label>
-            <input name="password" type="password">
+            {{ form.password.label }} {{ form.password(size=20) }}
         </div>
         <button>Submit</button>
     </form>
-    <script>
-        /* Temporary debugging code */
-        document.addEventListener("DOMContentLoaded", () => {
-            let x = document.querySelector("form");
-            x.username.value = 'a';
-            x.password.value = 'a';
-        });
-    </script>
 {% endblock%}
