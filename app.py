@@ -32,18 +32,6 @@ def signup_get():
             return "Users already existed"
     return render_template("signup.html", form=form)
 
-@app.post("/signup")
-def signup_post():
-    try:
-        new_user = session.signup_user(request)
-    except ValueError:
-        return "Invalid info"
-
-    if new_user:
-        return "Created user"
-    else:
-        return "Users already existed"
-
 @app.route("/login", methods=["GET", "POST"])
 def login_get():
     form = user_controller.LoginForm()
