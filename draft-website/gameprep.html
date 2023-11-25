@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     
-    <title>NinerNav | Home Page</title>
+    <title>NinerNav | Signed-In Page</title>
 </head>
 <body>
     <script src="components/header.js"></script>
@@ -42,27 +42,8 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class = "slider-style" id="imageSlider">
-                    <img src="images/homepage_atkins.jpg" title="Atkins" height="250">
-                    <img src="images/homepage_bench.jpg" title="Bench" height="250">
-                    <img src="images/homepage_starquad.jpg" title="Star Quad" height="250">
-                    <img src="images/homepage_union.jpg" title="Student Union" height="250">
-                    <img src="images/homepage_woodward.jpg" title="Woodward" height="250">
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class = "container stats-menu"> 
-                    <div id="loginSection">
-                    <h1 class="text-center"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
-                            <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
-                            <input type="password" class="form-control mt-3" placeholder="Password" id="password">
-                        <button type="button" class="btn btn-secondary mt-3" id="signInButton">Sign In</button> 
-                    
-                    
-                    <h4 class="text-center" style="padding-top: 20px;">------------</h4>
-
-                    <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
-                    <!-- <div id="displayUserInfo" class="text-center"></div> -->
+                <div class="slider-style embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/sbrYa4BXemA" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -71,7 +52,7 @@
 
 
 <div class="footer text-center">
-    <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToGameScreen()">Go</button>
+    <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToGameScreen()">Start</button>
 </div>
 
 <!-- Libraries -->

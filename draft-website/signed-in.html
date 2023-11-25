@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     
-    <title>NinerNav | Home Page</title>
+    <title>NinerNav | Signed-In Page</title>
 </head>
 <body>
     <script src="components/header.js"></script>
@@ -51,19 +51,17 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class = "container stats-menu"> 
-                    <div id="loginSection">
-                    <h1 class="text-center"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
-                            <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
-                            <input type="password" class="form-control mt-3" placeholder="Password" id="password">
-                        <button type="button" class="btn btn-secondary mt-3" id="signInButton">Sign In</button> 
-                    
-                    
-                    <h4 class="text-center" style="padding-top: 20px;">------------</h4>
-
-                    <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
-                    <!-- <div id="displayUserInfo" class="text-center"></div> -->
+                <div id="stats-container">
+                    <div class="stats-menu">
+                        <p class="stats-text">Hello, User!</p>
+                        <!-- Display user stats here -->
+                        <p class="stats-text">Average Accuracy: 85%</p>
+                        <p class="stats-text">Most Accurate: 95%</p>
+                        <p class="stats-text">Average Time: 30 seconds</p>
+                        <p class="stats-text">Fastest Time: 20 seconds</p>
+                    </div>
                 </div>
+            </div>
             </div>
         </div>
     </div>
