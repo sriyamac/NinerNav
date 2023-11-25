@@ -232,7 +232,7 @@ color: #CA2E55;
 }
 
 /* Main Page: Buttons and Container Below */
-/* sub buttons */
+/* Sub buttons */
 .sub-btn {
     margin-top: 10px ;
     font-size: 12px;
@@ -252,10 +252,10 @@ color: #CA2E55;
     text-align: left;
 }
 
-/*container for difficulty/gamemode buttons and signin/signup info*/
+/*Container for difficulty/gamemode buttons and signin/signup info*/
 .rounded-container {
     padding-block: 50px;
-    background-color:rgba(0, 0, 0, 0.128); /*to change background color of container */
+    background-color:rgba(0, 0, 0, 0.128); /*To change background color of container */
     border: 2px solid #6c757d;
     border-radius: 15px;
 }
@@ -375,4 +375,10 @@ color: #CA2E55;
     overflow: hidden;
     display: flex;
     height: 100vh;
+}
+
+/*Home page and Signed in html "go" button centered */
+.footer.text-center {
+    padding-right: 190px;
+    padding-bottom: 180px
 }
