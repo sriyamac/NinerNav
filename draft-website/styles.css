@@ -13,6 +13,8 @@ body {
 .banner {
     background-color: #F1E6B2;
     padding: 20px;
+    text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.8)
+
     
 }
 .banner h1 {
