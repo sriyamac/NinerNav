@@ -1,0 +1,25 @@
+{% extends 'common.html' %}
+
+{% block head %}
+    <title>NinerNav | Game Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+    </style>
+{% endblock%}
+
+{% block body %}
+    <div id="game-container">
+    <div id="left-image-container">
+        <img id="left-image" src="static/images/homepage_atkins.jpg" alt="Left Image">
+    </div>
+    <div id="right-container">
+        <img id="bottom-right-image" src="static/images/bx_loader.gif" alt="Bottom Right Image">
+        <button id="guess-button">Guess</button>
+    </div>
+{% endblock%}

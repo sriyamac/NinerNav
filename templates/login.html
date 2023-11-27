@@ -1,24 +1,45 @@
 {% extends 'common.html' %}
 
 {% block head %}
-    <title>Log In</title>
+    <title>NinerNav | Login Page</title>
 {% endblock%}
 
 {% block body %}
-    <h1>Log In</h1>
+    <div class="container form-container">
+        <h2 class="text-center">Login</h2>
+        <form id="signupForm" onsubmit="storeUserInfoAndRedirect(event)">
+            <div class="form-group">
+                <input type="text" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="Email">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Signup</button>
+        </form>
+    </div>
 
-    {% if form.username.errors or form.password.errors %}
-    <div class="errors">Invalid information.</div>
-    {% endif %}
+    <script>
+        //storing user info in local storage, need DB in future, and redirecting to main page
+        function storeUserInfoAndRedirect(event) {
+            event.preventDefault(); // Prevent the form from submitting
 
-    <form action="/login" method="POST">
-        {{ form.csrf_token }}
-        <div>
-            {{ form.username.label }} {{ form.username(size=20) }}
-        </div>
-        <div>
-            {{ form.password.label }} {{ form.password(size=20) }}
-        </div>
-        <button>Submit</button>
-    </form>
+            // const username = document.getElementById("username").value;
+            const firstName = document.getElementById("firstName").value;
+            // const lastName = document.getElementById("lastName").value;
+            // const email = document.getElementById("email").value;
+        
+            const userInfo = /*`Username: ${username}, */ 'First Name: ${firstName}'; /*, Last Name: ${lastName}, Email: ${email}`; //putting it into userInfo */
+        
+            localStorage.setItem("userName", userInfo); //saving
+        
+            //sending user to main.html
+            window.location.href = "main.html";
+        }
+    </script>
 {% endblock%}

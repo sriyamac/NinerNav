@@ -1,0 +1,29 @@
+{% extends 'common.html' %}
+
+{% block head %}
+    <title>NinerNav | Result Page</title>
+{% endblock%}
+
+{% block body %}
+    <div id="result-container">
+        <div class="image-container">
+            <div class="title">Your Guess</div>
+            <img src="static/images/homepage_starquad.jpg" alt="Your Guess Image">
+            <p class="result-text">50 points earned</p>
+            <div class="action-buttons">
+                <button>Next Location</button>
+                <button>End Game</button>
+            </div>
+        </div>
+
+        <div class="image-container">
+            <div class="title">Actual Location</div>
+            <img src="static/images/homepage_bench.jpg" alt="Actual Location Image">
+        </div>
+
+        <div class="fun-facts">
+            <div class="title">Fun Facts of Location</div>
+            <p>Add interesting facts about the location here.</p>
+        </div>
+    </div>
+{% endblock%}

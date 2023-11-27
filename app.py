@@ -17,7 +17,7 @@ app.secret_key = secrets["sessionkey"]
 import server.session as session
 import server.controllers.user as user_controller
 
-@app.route("/signup", methods=["GET", "POST"])
+""" @app.route("/signup", methods=["GET", "POST"])
 def signup_get():
     form = user_controller.SignupForm()
     if form.validate_on_submit():
@@ -30,9 +30,9 @@ def signup_get():
             return "Created user"
         else:
             return "Users already existed"
-    return render_template("signup.html", form=form)
+    return render_template("dummy_signup.html", form=form) """
 
-@app.route("/login", methods=["GET", "POST"])
+""" @app.route("/login", methods=["GET", "POST"])
 def login_get():
     form = user_controller.LoginForm()
     if form.validate_on_submit():
@@ -45,7 +45,12 @@ def login_get():
             return "Signed in"
         else:
             return "Sign in failed"
-    return render_template("login.html", form=form)
+    return render_template("dummy_login.html", form=form) """
+
+# Temporary debugging, do not keep
+@app.get("/<path>")
+def wildcard(path):
+    return render_template(path + ".html")
 
 if __name__ == "__main__":
     app.run()

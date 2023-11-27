@@ -1,0 +1,252 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #899064;
+    color: #101820;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.footer {
+    margin-top: auto;
+}
+.banner {
+    background-color: #F1E6B2;
+    padding: 20px;
+    
+}
+.banner h1 {
+    color: #802F2D;
+}
+h1{
+    font-family: 'Black Ops One', cursive;
+    font-size: 50px;
+}
+.slider-style{
+    height: 300px;
+    display: none;
+    border: 2px solid #555;
+    border-radius: 5%;
+}
+.login-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #85bb65;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+.login-btn:hover {
+    background-color: #63765A;
+}
+/*displaying user info*/
+#displayUserInfo { 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+a 
+{
+color: #007377;
+text-align: center;
+text-decoration: none;
+font-weight: bold;
+transition: all 0.3s ease-in-out;
+}
+a:hover 
+{
+color: #19847f;
+text-decoration: underline;
+}
+a:active 
+{
+color: #CA2E55;
+}
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.leaderboard {
+    width: 70%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.leaderboard-entry {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.load-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #85bb65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.load-more-btn:hover {
+    background-color: #63765A;
+}
+.bx-wrapper {
+	margin-bottom: 20px;
+}
+#pager {
+	text-align: center;
+	font-size: 90%;
+	color: blue;
+}
+#game-container {
+    flex: 1;
+    display: flex;
+    position: relative;
+}
+
+#left-image-container {
+    flex: 1;
+    max-width: 80%; /* Adjust the max-width as needed */
+    padding: 50px; /* Adjust the padding as needed */
+    box-sizing: border-box;
+}
+
+#left-image {
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    object-fit: cover;
+}
+
+#right-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#bottom-right-image {
+    width: 200px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    border: 2px solid black;
+}
+
+#guess-button {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#result-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.image-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.title {
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.fun-facts {
+    flex: 0 0 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-text {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Added styles for side-by-side buttons with padding */
+.action-buttons button:first-child {
+    margin-right: 10px;
+}
+#imageSlider {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Main Page: Buttons and Container Below */
+/* sub buttons */
+.sub-btn {
+    margin-top: 10px ;
+    font-size: 12px;
+    padding: 4px 8px;
+    background-color: #6c757d;
+    color: #ffffff;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-left: 30px; /* Adding indentation */
+    width: 120px;
+}
+
+.main-btn {
+    border-radius: 3px;
+}
+
+/*container for difficulty/gamemode buttons and signin/signup info*/
+.rounded-container {
+    padding-block: 50px;
+    background-color:rgba(0, 0, 0, 0.128); /*to change background color of container */
+    border: 2px solid #6c757d;
+    border-radius: 15px;
+}
