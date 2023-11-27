@@ -14,11 +14,15 @@ body {
     background-color: #F1E6B2;
     padding: 20px;
     text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.8)
-
-    
 }
 .banner h1 {
     color: #802F2D;
+}
+.signin{
+    font-size: 40px;
+}
+.hello{
+    font-size: 25px;
 }
 h1{
     font-family: 'Black Ops One', cursive;
@@ -351,7 +355,7 @@ color: #CA2E55;
 
 /* Stats menu styling */
 .stats-menu {
-    background-color: #333;
+    background-color: #333333;
     border: 2px solid #333;
     border-radius: 8px;
     color: white;
