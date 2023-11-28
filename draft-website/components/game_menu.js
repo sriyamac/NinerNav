@@ -31,7 +31,12 @@ function redirectToLeaderboard() {
 
 //redirct to login page
 function redirectToSignUp() {
-    window.location.href = "login.html";
+    window.location.href = "sign-up.html";
+}
+
+function redirectToGameScreen() {
+    //Redirect to gamepage.html
+    window.location.href = 'gamepage.html';
 }
 
 //display user information
@@ -51,13 +56,13 @@ function redirectToSignUp() {
 //when page loads, automatically displays user info
 // displayUserInfo();
 
-//redirect to game screen 
-function redirectToGameScreen() {
-    //if the user is logged in, then go button is functional
-    const userInfo = localStorage.getItem("userInfo");
-    if (userInfo) {
-        window.location.href = "gamescreen.html";
-    } else {
-        alert("Please login/signup first.");
-    }
-}
+// //redirect to game screen 
+// function redirectToGameScreen() {
+//     //if the user is logged in, then go button is functional
+//     const userInfo = localStorage.getItem("userInfo");
+//     if (userInfo) {
+//         window.location.href = "gamescreen.html";
+//     } else {
+//         alert("Please login/signup first.");
+//     }
+// }
