@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3z7CTyfh32qo-GV7iLWF5mR1lbcrm70&libraries=geometry
+    &callback=initMap" async defer></script>
+    <script>
+
+      var map;
+      var marker;//hold num of marker
+      var coordinates;//holds coodinates
+
+      function initMap() {
+        let UNCC = {lat: 35.308168, lng: -80.733699}
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: UNCC,
+          zoom: 15
+
+        });
+        var marker1 =new google.maps.Marker({
+        position: UNCC,
+        map: map});
+
+            //on click = add marker to map
+        map.addListener('click', function(e) {
+          placeMarkerAndPanTo(e.latLng, map);
+        });
+        }
+
+        function placeMarkerAndPanTo(latLng, map) {
+         // delete mark if on alr on map
+         if (marker) {
+          marker.setMap(null);
+        }
+
+        // new marker
+        marker2 = new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+
+        // Pan to new marker
+        map.panTo(latLng);
+
+        // Store coordinates
+        coordinates = latLng;
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(UNCC, latLng);
+        var distanceInMiles = distance / 1609.34;
+        var line = new google.maps.Polyline({path: [UNCC, latLng], map: map});
+
+        console.log(coordinates.toString());
+        console.log(distanceInMiles);
+      }
+    
+    </script>
+  </head>
+  <body onload="initMap()">
+    <div id="map" style="height: 500px; width: 100%;"></div>
+  </body>
+</html>
