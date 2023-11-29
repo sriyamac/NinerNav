@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3z7CTyfh32qo-GV7iLWF5mR1lbcrm70&callback=initMap" async defer></script>
+    <script>
+      var map;
+      //hold marker
+      var marker; 
+
+      function initMap() {
+        let UNCC = {lat: 35.308168, lng: -80.733699}
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: UNCC,
+          zoom: 15
+
+        });
+
+    
+
+        // Add marker when user clicks
+        map.addListener('click', function(e) {
+          placeMarkerAndPanTo(e.latLng, map);
+        });
+      }
+
+      function placeMarkerAndPanTo(latLng, map) {
+        // If a marker already exists -> remove original marker
+        if (marker) {
+          marker.setMap(null);
+        }
+
+        // Add new marker
+        marker = new google.maps.Marker({
+          position: latLng,
+          map: map
+        });
+
+        map.panTo(latLng);
+      }
+    </script>
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+  </body>
+</html>
