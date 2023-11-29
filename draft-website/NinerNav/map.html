@@ -11,6 +11,8 @@
       var uMark;
       //var to hold distance between umark and rmark
       var scoreDist; 
+      //line draw to connect markers
+      var line;
       
       //var rMark. long and lat of the target.
       var rMark = {lat: 35.306320, lng: -80.733389};
@@ -53,6 +55,18 @@
             position: rMark,
             map:map 
           });
+
+          //checks for previous line and deletes it
+          if(line){
+            line.setMap(null);
+          }
+          //adds line
+          line = new google.maps.Polyline({
+            path:[rMark, uMark],
+            odesic: true,
+            strokeColor: "#FF0000",
+            map:map})
+
           // Calculate the distance between uMark and rMark in meters
           scoreDist = google.maps.geometry.spherical.computeDistanceBetween(uMark, rMark);
         //   trueDist = scoreDist/3.2808399;
@@ -64,7 +78,7 @@
         
 
         //calculate the score
-        if(scoreDist < 50){
+        if(scoreDist < 75){
         var score = 1000 / scoreDist;
         console.log("your score is" + score)
         }
