@@ -2,27 +2,29 @@
 <html>
   <head>
     <title>Simple Map</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3z7CTyfh32qo-GV7iLWF5mR1lbcrm70&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBB3z7CTyfh32qo-GV7iLWF5mR1lbcrm70&callback=initMap&libraries=geometry" async defer></script>
     <script>
       var map;
-      //marker
+      //marker var
       var marker;
-      //user submitted marker
-      var uMark; 
-    //marker for actual location
-      var rMark = {lat: -33.397, lng: 149.644}; 
-      //calculated distance
+      //user placed marker var
+      var uMark;
+      //var to hold distance between umark and rmark
       var scoreDist; 
+      
+      //var rMark. long and lat of the target.
+      var rMark = {lat: 35.306320, lng: -80.733389};
+      
+      
 
       function initMap() {
         let UNCC = {lat: 35.308168, lng: -80.733699}
         map = new google.maps.Map(document.getElementById('map'), {
           center: UNCC,
           zoom: 15
-
         });
 
-        // add marker where user clicks
+        // event listener adds marker when/where user clicks
         map.addListener('click', function(e) {
           placeMarkerAndPanTo(e.latLng, map);
         });
@@ -40,20 +42,38 @@
           map: map
         });
 
+        uMark = latLng;
+        console.log(uMark.toString())
         map.panTo(latLng);
       }
 
       function submitMarker() {
         if (marker) {
-          uMark = marker.getPosition();
-
+          rmark = new google.maps.Marker({
+            position: rMark,
+            map:map 
+          });
           // Calculate the distance between uMark and rMark in meters
           scoreDist = google.maps.geometry.spherical.computeDistanceBetween(uMark, rMark);
-
+        //   trueDist = scoreDist/3.2808399;
+          console.log(scoreDist);
           alert("Marker submitted! Distance to rMark: " + scoreDist + " meters.");
         } else {
           alert("Please place a marker on the map before submitting.");
         }
+        
+
+        //calculate the score
+        if(scoreDist < 50){
+        var score = 1000 / scoreDist;
+        console.log("your score is" + score)
+        }
+        else{
+          console.log("no points scored")
+        }
+
+
+
       }
     </script>
     <style>
