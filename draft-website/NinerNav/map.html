@@ -79,7 +79,7 @@
 
         //calculate the score
         if(scoreDist < 75){
-        var score = 200 * (1 + ((-1)/(1 + Math.exp(-scoreDist/10))));
+        var score = Math.floor(200 * (1 + ((-1)/(1 + Math.exp(-scoreDist/10)))));
         console.log("your score is" + score)
         }
         else{
