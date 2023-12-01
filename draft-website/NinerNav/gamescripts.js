@@ -1,9 +1,11 @@
+
 var gallery = [
     'gallery/testimg1.jpeg',
     'gallery/testimg2.jpeg',
     'gallery/image3.jpg'
 ];
 var currentImageIndex = 0;
+
 
 // Randomize the order of the gallery
 gallery.sort(function() { return 0.5 - Math.random() });

@@ -24,5 +24,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Set an interval to change the image every 3 seconds (adjust as needed)
-        setInterval(showNextImage, 3000);
+        setInterval(showNextImage, 2000);
     });

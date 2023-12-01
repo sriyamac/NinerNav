@@ -6,10 +6,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Gentium+Book+Plus&family=Gugi&family=Inconsolata&family=Itim&family=Julee&family=Knewave&family=Overpass&family=Silkscreen&family=Space+Mono&family=Tilt+Neon&display=swap" rel="stylesheet">
+    
     <script src="components/slider.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-
+    
     <title>NinerNav | Home Page</title>
 </head>
 <body>
@@ -17,10 +19,10 @@
 
     <div class="container flex-grow-1">
         <div class="row">
-            <div class="col-md-2 rounded-container">
+            <div class="col-md-2 stats-menu">
                 <div class="btn-group-vertical">
                     <!-- Change Difficulty Button -->
-                    <button type="button" class="btn btn-success mt-3 main-btn" id= "difficultyButton">Change Difficulty</button>
+                    <button type="button" class="btn btn-success mt-3 main-btn " id= "difficultyButton">Change Difficulty</button>
                     <div id="difficultySubButtons" style="display: none;">
                         <button type="button" class="btn btn-success sub-btn">Beginner</button>
                         <button type="button" class="btn btn-success sub-btn">Medium</button>
@@ -49,9 +51,9 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class = "container rounded-container"> 
+                <div class = "container stats-menu"> 
                     <div id="loginSection">
-                    <h1 class="text-center"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
+                    <h1 class="text-center signin"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
                             <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
                             <input type="password" class="form-control mt-3" placeholder="Password" id="password">
                         <button type="button" class="btn btn-secondary mt-3" id="signInButton">Sign In</button> 
@@ -69,79 +71,15 @@
 
 
 <div class="footer text-center">
-    <button type="button" class="btn btn-success btn-lg mb-3" onclick="redirectToGameScreen()">Go</button>
+    <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToSignedIn()">Go</button>
 </div>
 
 <!-- Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<script>
-
-    /* to hide subbuttons until user clicks on main button */
-    const difficultyButton = document.getElementById('difficultyButton');
-    const difficultySubButtons = document.getElementById('difficultySubButtons');
-
-        difficultyButton.addEventListener('click', function() {
-            if (difficultySubButtons.style.display === 'none') {
-                difficultySubButtons.style.display = 'block';
-            } else {
-                difficultySubButtons.style.display = 'none';
-            }
-        });
-
-    const gameButton = document.getElementById('gameButton');
-    const gameModeSubButtons = document.getElementById('gameModeSubButtons');
-
-    gameButton.addEventListener('click', function() {
-        if (gameModeSubButtons.style.display === 'none') {
-            gameModeSubButtons.style.display = 'block';
-        } else {
-            gameModeSubButtons.style.display = 'none';
-        }
-    });
+<script src="components/game_menu.js"></script>
 
 
-
-
-    // Redirect to leaderboard page
-    function redirectToLeaderboard() {
-        window.location.href = "leaderboard.html";
-    }
-
-    //redirct to login page
-    function redirectToSignUp() {
-        window.location.href = "login.html";
-    }
-
-    //display user information
-    // function displayUserInfo() {
-    //     //locally stored user info for now, need DB in future
-    //     const userInfo = localStorage.getItem("userInfo");
-
-    //     //display functionality 
-    //     if (userInfo) {
-    //         const userInfoLines = userInfo.split(', ').join('<br>'); //formating, creating separate lines for each user credential 
-    //         document.getElementById("displayUserInfo").innerHTML = `<h4>User Info:</h4><p>${userInfoLines}</p>`;
-    //     } else {
-    //         document.getElementById("displayUserInfo").innerText = "No user info available.";
-    //     }
-    // }
-
-    //when page loads, automatically displays user info
-    // displayUserInfo();
-
-    //redirect to game screen 
-    function redirectToGameScreen() {
-        //if the user is logged in, then go button is functional
-        const userInfo = localStorage.getItem("userInfo");
-        if (userInfo) {
-            window.location.href = "gamescreen.html";
-        } else {
-            alert("Please login/signup first.");
-        }
-    }
-</script>
 </body>
 </html>

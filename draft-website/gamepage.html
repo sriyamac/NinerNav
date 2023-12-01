@@ -9,26 +9,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>NinerNav | Game Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            height: 100vh;
-        }
-    </style>
 </head>
-<body>
+<body class="gamer">
     <script src="components/header.js"></script>
 
     <div id="game-container">
         <div id="left-image-container">
-            <img id="left-image" src="images/homepage_atkins.jpg" alt="Left Image">
+            <iframe id="left-image" src="NinerNav/game.html" name="Game" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
         </div>
         <div id="right-container">
-            <img id="bottom-right-image" src="images/bx_loader.gif" alt="Bottom Right Image">
-            <button id="guess-button">Guess</button>
+            <iframe id="left-image" src="NinerNav/map.html" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
+            <!-- <button id="guess-button">Guess</button> -->
         </div>
     
 </body>
