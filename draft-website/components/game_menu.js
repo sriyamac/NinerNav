@@ -49,6 +49,25 @@ function redirectToGameScreen() {
     window.location.href = 'gamepage.html';
 }
 
+function countdown(minutes) { //change parameter accordingly
+    var seconds = 60;
+    var mins = minutes
+    function tick() {
+        var counter = document.getElementById("counter"); //attached to id counter
+        var current_minutes = mins-1
+        seconds--;
+        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            setTimeout(tick, 1000);
+        } else {
+            if(mins > 1){
+                countdown(mins-1);           
+            }
+        }
+    }
+    tick();
+}
+
 //display user information
 // function displayUserInfo() {
 //     //locally stored user info for now, need DB in future
