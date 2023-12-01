@@ -2,24 +2,29 @@
 
 {% block head %}
     <title>NinerNav | Game Page</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            display: flex;
-            height: 100vh;
-        }
-    </style>
 {% endblock%}
 
 {% block body %}
     <div id="game-container">
-    <div id="left-image-container">
-        <img id="left-image" src="static/images/homepage_atkins.jpg" alt="Left Image">
-    </div>
-    <div id="right-container">
-        <img id="bottom-right-image" src="static/images/bx_loader.gif" alt="Bottom Right Image">
-        <button id="guess-button">Guess</button>
+        <div id="left-image-container">
+            <iframe id="left-image" src="NinerNav/game.html" name="Game" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
+        </div>
+        <div id="right-container">
+            <iframe id="left-image" src="NinerNav/map.html" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
+            
+            <!-- <button id="guess-button">Guess</button> -->
+        </div>
+
+        <!--element that displays the message data-->
+        <div id="score"></div>
+
+        <!-- scipt that recieve the post message-->
+        <script>
+            function displayScore(score) {
+                console.log(score);
+            }
+        </script>
     </div>
 {% endblock%}

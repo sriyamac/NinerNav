@@ -1,9 +1,10 @@
-{% extends 'common.html' %}
-{% block head %}
-    <link rel="stylesheet" type="text/css" href="gamestyle.css">
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/gamestyle.css">
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    {% endblock %} 
-    {% block body %}
+</head>
+<body>
     <a-scene>
         <a-sky id="sky" src="" rotation="0 -130 0"></a-sky>
         <button id="pause-button" onclick="pauseGame()">Pause</button>
@@ -51,5 +52,6 @@
         </div>
     </div>
 
-    <script src="gamescripts.js"></script>
-    {% endblock %}
+    <script src="/static/components/gamescripts.js"></script>
+</body>
+</html>

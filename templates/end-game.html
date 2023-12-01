@@ -1,0 +1,68 @@
+{% extends 'common.html' %}
+
+{% block head %}
+    <title>NinerNav | End Game Page</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container flex-grow-1">
+        <div class="row">
+            <div class="col-md-2 stats-menu">
+                <div class="btn-group-vertical">
+                    <!-- Change Difficulty Button -->
+                    <button type="button" class="btn btn-success mt-3 main-btn" id="difficultyButton">Change Difficulty</button>
+                    <div id="difficultySubButtons" style="display: none;">
+                        <button type="button" class="btn btn-success sub-btn">Beginner</button>
+                        <button type="button" class="btn btn-success sub-btn">Medium</button>
+                        <button type="button" class="btn btn-success sub-btn">Expert</button>
+                    </div>
+
+                    <!-- Change Game Mode Button -->
+                    <button type="button" class="btn btn-success mt-3 main-btn" id="gameButton">Change Game Mode</button>
+                    <div id="gameModeSubButtons" style="display: none;">
+                        <button type="button" class="btn btn-success sub-btn">Regular</button>
+                        <button type="button" class="btn btn-success sub-btn">Timed</button>
+                        <button type="button" class="btn btn-success sub-btn">Sight Seeing</button>
+                    </div>
+
+                    <!-- View Leaderboard Button -->
+                    <button type="button" class="btn btn-success mt-3" onclick="redirectToLeaderboard()">View LeaderBoard</button>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <h1 class="text-center mb-3 stats-menu">50 Points Earned</h1>
+                <div class=slider-style>
+                <img src="static/images/homepage_bench.jpg" title="Bench" class="img-fluid" alt="Bench Image">
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div id="feedback-container" class="stats-menu">
+                    <h2 class="text-center mb-3">Feedback Survey</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="feedback">How satisfied are you with the game?</label>
+                            <select class="form-control" id="feedback" name="feedback">
+                                <option value="very-satisfied">Very Satisfied</option>
+                                <option value="satisfied">Satisfied</option>
+                                <option value="neutral">Neutral</option>
+                                <option value="unsatisfied">Unsatisfied</option>
+                                <option value="very-unsatisfied">Very Unsatisfied</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="comments">Any additional comments or suggestions?</label>
+                            <textarea class="form-control" id="comments" name="comments" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer text-center">
+        <button type="button" class="btn btn-success btn-lg mb-3">Start New Game</button>
+    </div>
+
+    <script src="static/components/game_menu.js"></script>
+{% endblock %}

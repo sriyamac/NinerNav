@@ -51,10 +51,14 @@ def login_get():
 @app.get("/<path>")
 def wildcard(path):
     return render_template(path)
+
 @app.get("/NinerNav/<path>")
 def wildcard_other(path):
     return render_template("NinerNav/" + path)
 
+@app.get("/favicon.ico")
+def favicon():
+    return "", 404
+
 if __name__ == "__main__":
     app.run()
-
