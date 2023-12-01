@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
     <title>NinerNav | Game Page</title>
+    
 </head>
 <body class="gamer">
     <script src="components/header.js"></script>
@@ -21,8 +22,21 @@
         <div id="right-container">
             <iframe id="left-image" src="NinerNav/map.html" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
             </iframe>
+            
             <!-- <button id="guess-button">Guess</button> -->
         </div>
+
+        <!--element that displays the message data-->
+        <div id="score"></div>
+
+        <!-- scipt that recieve the post message-->
+        <script>
+            window.addEventListener('message', function(event) {
+                let results = event.data;
+                document.getElementById("score").innerHTML = "Your score is: " + results;
+                console.log(results);
+            });
+        </script>
     
 </body>
 </html>
