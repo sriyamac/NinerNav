@@ -1,0 +1,390 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Overpass', sans-serif;
+    background-color: #899064;
+    color: #101820;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.banner {
+    background-color: #F1E6B2;
+    padding: 20px;
+    text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.8)
+}
+.banner h1 {
+    color: #802F2D;
+}
+.signin{
+    font-size: 40px;
+}
+.hello{
+    font-size: 25px;
+}
+h1{
+    font-family: 'Black Ops One', cursive;
+    font-size: 50px;
+}
+.slider-style{
+    height: 300px;
+    border: 2px solid #555;
+    border-radius: 5%;
+    overflow: hidden;
+}
+.slider-style img {
+    width: 100%;
+    height: auto;
+}
+.footer {
+    margin-top: auto;
+}
+.login-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #85bb65;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+}
+.login-btn:hover {
+    background-color: #63765A;
+}
+/*displaying user info*/
+#displayUserInfo { 
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+a 
+{
+color: #007377;
+text-align: center;
+text-decoration: none;
+font-weight: bold;
+transition: all 0.3s ease-in-out;
+}
+a:hover 
+{
+color: #19847f;
+text-decoration: underline;
+}
+a:active 
+{
+color: #CA2E55;
+}
+
+.leaderboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.leaderboard {
+    width: 70%;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.leaderboard-entry {
+    margin: 10px 0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+.load-more-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #85bb65;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.load-more-btn:hover {
+    background-color: #63765A;
+}
+.bx-wrapper {
+	margin-bottom: 20px;
+}
+#pager {
+	text-align: center;
+	font-size: 90%;
+	color: blue;
+}
+#game-container {
+    flex: 1;
+    display: flex;
+    position: relative;
+}
+
+#left-image-container {
+    flex: 1;
+    max-width: 80%; /* Adjust the max-width as needed */
+    padding: 50px; /* Adjust the padding as needed */
+    box-sizing: border-box;
+}
+
+#left-image {
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+    object-fit: cover;
+}
+
+#right-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#bottom-right-image {
+    width: 300px; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    border: 2px solid black;
+}
+
+#guess-button {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+#result-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.image-container {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.title {
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.fun-facts {
+    flex: 0 0 30%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid #333;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.result-text {
+    text-align: center;
+    font-size: 24px; /* Increase font size */
+    margin-bottom: 10px;
+    background-color: #29088e; /* Add background color */
+    color: white; /* Set text color */
+    padding: 10px; /* Add padding */
+    border-radius: 8px; /* Add border radius */
+}
+
+.action-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin: 0 10px;
+    cursor: pointer;
+    border: 2px solid #333;
+    background-color: #333;
+    color: white;
+    border-radius: 8px;
+}
+
+/* Added styles for side-by-side buttons with padding */
+.action-buttons button:first-child {
+    margin-right: 10px;
+}
+#imageSlider {
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Main Page: Buttons and Container Below */
+/* Sub buttons */
+.sub-btn {
+    margin-top: 10px ;
+    font-size: 12px;
+    padding: 4px 8px;
+    background-color: #6c757d;
+    color: #ffffff;
+    display: block;
+    border: 1px solid transparent;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-left: 30px; /* Adding indentation */
+    width: 120px;
+}
+
+.main-btn {
+    width: 100%;
+    text-align: left;
+}
+
+/*Container for difficulty/gamemode buttons and signin/signup info*/
+.rounded-container {
+    padding-block: 50px;
+    background-color:rgba(0, 0, 0, 0.128); /*To change background color of container */
+    border: 2px solid #6c757d;
+    border-radius: 15px;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .col-md-2,
+    .col-md-6,
+    .col-md-2 {
+        width: 100%;
+    }
+
+    .rounded-container {
+        margin-top: 20px; /* Adjust margin for better spacing */
+    }
+
+    .login-btn,
+    #guess-button,
+    .action-buttons button {
+        width: 100%; /* Make buttons full width on smaller screens */
+    }
+
+    .sub-btn {
+        margin-left: 0; /* Remove indentation for sub buttons on smaller screens */
+    }
+}
+
+/* Go button styling */
+#go {
+    padding: 15px 60px;
+    font-size: 30px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#go:hover {
+    background-color: #63765A;
+}
+
+/* Login Page: Specific styles */
+.form-container {
+    max-width: 400px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #333;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #63765A;
+    border: 1px solid #63765A;
+}
+/* Container for stats menu */
+#stats-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+/* Stats menu styling */
+.stats-menu {
+    background-color: #333333;
+    border: 2px solid #333;
+    border-radius: 8px;
+    color: white;
+    padding: 10px;
+}
+
+/* Stats text */
+.stats-text {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+/* Responsive styles for smaller screens */
+@media only screen and (max-width: 768px) {
+    #stats-container {
+        margin-top: 20px; /* Adjust margin for better spacing */
+    }
+}
+
+.gamer{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    height: 100vh;
+}
+
+/*Home page and Signed in html "go" button centered */
+.footer.text-center {
+    padding-right: 190px;
+    padding-bottom: 330px
+}

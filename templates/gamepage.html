@@ -1,0 +1,30 @@
+{% extends 'common.html' %}
+
+{% block head %}
+    <title>NinerNav | Game Page</title>
+{% endblock%}
+
+{% block body %}
+    <div id="game-container">
+        <div id="left-image-container">
+            <iframe id="left-image" src="NinerNav/game.html" name="Game" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
+        </div>
+        <div id="right-container">
+            <iframe id="left-image" src="NinerNav/map.html" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
+            </iframe>
+            
+            <!-- <button id="guess-button">Guess</button> -->
+        </div>
+
+        <!--element that displays the message data-->
+        <div id="score"></div>
+
+        <!-- scipt that recieve the post message-->
+        <script>
+            function displayScore(score) {
+                console.log(score);
+            }
+        </script>
+    </div>
+{% endblock%}
