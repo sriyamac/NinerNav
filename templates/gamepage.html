@@ -18,12 +18,25 @@
         </div>
 
         <!--element that displays the message data-->
-        <div id="score"></div>
-
+        <div id="results-column">
+            <div id="score" >
+                Score: 
+            </div>
+            <div id="distance">
+                Distance:
+            </div>
+        </div>
         <!-- scipt that recieve the post message-->
         <script>
+            function displayDistance(distance) {
+                document.getElementById("distance").innerHTML = "Distance: " + distance;
+                console.log("this is your distance" + distance);
+            }
+        </script>
+        <script>
             function displayScore(score) {
-                console.log(score);
+                document.getElementById("score").innerHTML = "Score: " + score;
+                console.log("this is the score" + score);
             }
         </script>
     </div>

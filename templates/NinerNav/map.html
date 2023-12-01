@@ -80,6 +80,7 @@
         //calculate the score and send to the parent
         let score = Math.floor(200 * (1 + ((-1)/(1 + Math.exp(-scoreDist/10)))));
         parent.displayScore(score);
+        parent.displayDistance(scoreDist);
       }
     </script>
     <style>
