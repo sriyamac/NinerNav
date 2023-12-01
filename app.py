@@ -50,7 +50,11 @@ def login_get():
 # Temporary debugging, do not keep
 @app.get("/<path>")
 def wildcard(path):
-    return render_template(path + ".html")
+    return render_template(path)
+@app.get("/NinerNav/<path>")
+def wildcard_other(path):
+    return render_template("NinerNav/" + path)
 
 if __name__ == "__main__":
     app.run()
+
