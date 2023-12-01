@@ -29,13 +29,23 @@ function redirectToLeaderboard() {
     window.location.href = "leaderboard.html";
 }
 
-//redirct to login page
+//Redirct to login page
 function redirectToSignUp() {
     window.location.href = "sign-up.html";
 }
 
+//Redirct to signed-in page
+function redirectToSignedIn() {
+    window.location.href = "signed-in.html";
+}
+
+//Redirect to gameprep page
+function redirectToGamePrep() {
+    window.location.href = 'gameprep.html';
+}
+
+//Redirect to gamepage.html
 function redirectToGameScreen() {
-    //Redirect to gamepage.html
     window.location.href = 'gamepage.html';
 }
 
