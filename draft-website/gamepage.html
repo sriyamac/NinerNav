@@ -31,11 +31,9 @@
 
         <!-- scipt that recieve the post message-->
         <script>
-            window.addEventListener('message', function(event) {
-                let results = event.data;
-                document.getElementById("score").innerHTML = "Your score is: " + results;
-                console.log(results);
-            });
+            function displayScore(score) {
+                console.log(score);
+            }
         </script>
     
 </body>
