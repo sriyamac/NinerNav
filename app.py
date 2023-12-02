@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import json
 app = Flask(__name__)
 
@@ -17,24 +17,12 @@ app.secret_key = secrets["sessionkey"]
 import server.session as session
 import server.controllers.user as user_controller
 
-""" @app.route("/signup", methods=["GET", "POST"])
-def signup_get():
-    form = user_controller.SignupForm()
-    if form.validate_on_submit():
-        try:
-            new_user = session.signup_user(request)
-        except ValueError:
-            return "Invalid info"
-
-        if new_user:
-            return "Created user"
-        else:
-            return "Users already existed"
-    return render_template("dummy_signup.html", form=form) """
-
-""" @app.route("/login", methods=["GET", "POST"])
-def login_get():
+@app.route("/", methods=["GET", "POST"])
+def index():
+    """ form = user_controller.LoginForm()
+    return render_template("index.html", form=form) """
     form = user_controller.LoginForm()
+    # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
         try:
             user = session.login_user(request)
@@ -45,16 +33,54 @@ def login_get():
             return "Signed in"
         else:
             return "Sign in failed"
-    return render_template("dummy_login.html", form=form) """
+    # TODO: display errors based on exactly how the sign in attempt failed if need be
+    return render_template("index.html", form=form)
 
-# Temporary debugging, do not keep
-@app.get("/<path>")
-def wildcard(path):
-    return render_template(path)
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
+    form = user_controller.SignupForm()
+    # If a form was submitted (i.e., this is a POST) and was valid, this check passes
+    if form.validate_on_submit():
+        # Attempt to sign the user up
+        try:
+            new_user = session.signup_user(request)
+        except ValueError:
+            return "Invalid info"
 
-@app.get("/NinerNav/<path>")
-def wildcard_other(path):
-    return render_template("NinerNav/" + path)
+        if new_user:
+            return redirect(url_for("index"))
+        else:
+            return "Users already existed"
+    # TODO: display errors based on exactly how the sign up attempt failed if need be
+    return render_template("sign-up.html", form=form)
+
+@app.get("/gameprep")
+def gameprep():
+    return render_template("gameprep.html")
+
+@app.get("/gamepage")
+def gamepage():
+    return render_template("gamepage.html")
+
+@app.get("/NinerNav/game")
+def ninernav_game():
+    return render_template("NinerNav/game.html")
+
+@app.get("/NinerNav/map")
+def ninernav_map():
+    return render_template("NinerNav/map.html")
+
+@app.get("/leaderboard")
+def leaderboard():
+    return render_template("leaderboard.html")
+
+@app.get("/resultpage")
+def resultpate():
+    return render_template("resultpage.html")
+
+@app.get("/endgame")
+def endgame():
+    return render_template("end-game.html")
 
 @app.get("/favicon.ico")
 def favicon():

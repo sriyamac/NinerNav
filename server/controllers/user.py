@@ -1,3 +1,8 @@
+"""Forms and validators to determine if authentication information provided by a user is valid.
+
+This file contains wtforms that should be used to render templates and validate submitted user info
+wherever possible.
+"""
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, ValidationError
 from wtforms.validators import DataRequired, length, Regexp
@@ -45,4 +50,4 @@ class LoginForm(FlaskForm):
 class SignupForm(FlaskForm):
     username = StringField("username", validators=[DataRequired(), length(max=100)])
     email = StringField("email", validators=[DataRequired(), _is_valid_email])
-    password = PasswordField("password", validators=[DataRequired(), Regexp(".*[A-Z].*"), Regexp(".*[a-z].*")])
+    password = PasswordField("password", validators=[DataRequired(), length(min=12), Regexp(".*[A-Z].*"), Regexp(".*[a-z].*")])
