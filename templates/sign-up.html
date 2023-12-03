@@ -7,20 +7,18 @@
 {% block body %}
     <div class="container form-container">
         <h2 class="text-center">Sign Up</h2>
-        <form id="signupForm" onsubmit="storeUserInfoAndRedirect(event)">
+        <form id="signupForm" method="POST" action="/signup">
+            {{ form.csrf_token }}
             <div class="form-group">
-                <input type="text" class="form-control" id="username" placeholder="Username">
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="firstName" placeholder="First Name">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" id="lastName" placeholder="Last Name">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
             </div>
-            <div class="form-group">
-                <input type="email" class="form-control" id="email" placeholder="Email">
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Signup</button>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
         </form>
     </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-"""A set of functions and classes to manage user sessions and authentication.
+"""A set of functions to manage user sessions and authentication.
 
 This file has funcitons to handle sign ups, log ins, and tracking user sessions. The keys added to
 the session object are listed below.
@@ -11,7 +11,7 @@ from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from sqlalchemy.exc import IntegrityError
 import re
-from .models import user as user_model, models
+from ..models import user as user_model, models
 
 _ph = PasswordHasher()
 

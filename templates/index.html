@@ -39,29 +39,24 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <div class = "container stats-menu"> 
-                    <div id="loginSection">
-                    <h1 class="text-center signin"><b>Sign In</b></h1> <!--user data needs be fetched in DB, please use username/password id to store -->
-                            <input type="text" class="form-control mt-3" placeholder="Username" id="usename">
-                            <input type="password" class="form-control mt-3" placeholder="Password" id="password">
-                        <button type="button" class="btn btn-secondary mt-3" id="signInButton">Sign In</button> 
-                    
-                    
-                    <h4 class="text-center" style="padding-top: 20px;">------------</h4>
+                <div class = "container stats-menu">
+                    <form action="/" method="POST">
+                        <h1 class="text-center signin"><b>Sign In</b></h1>
+                        {{ form.csrf_token }}
+                        <input type="text" class="form-control mt-3" placeholder="Username" id="usename" name="username">
+                        <input type="password" class="form-control mt-3" placeholder="Password" id="password" name="password">
+                        <button type="submit" class="btn btn-secondary mt-3" id="signInButton">Sign In</button>
 
-                    <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
-                    <!-- <div id="displayUserInfo" class="text-center"></div> -->
+                        <h4 class="text-center" style="padding-top: 20px;">------------</h4>
+
+                        <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-    <div class="footer text-center">
-    <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToSignedIn()">Go</button>
-    </div>
-
+        <div class="footer text-center">
+        <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToSignedIn()">Go</button>
+        </div>
     </div>
     <script src="static/components/game_menu.js"></script>
 {% endblock %}

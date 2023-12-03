@@ -26,27 +26,22 @@ gameButton.addEventListener('click', function() {
 
 // Redirect to leaderboard page
 function redirectToLeaderboard() {
-    window.location.href = "leaderboard.html";
+    window.location.href = "/leaderboard";
 }
 
 //Redirct to login page
 function redirectToSignUp() {
-    window.location.href = "sign-up.html";
-}
-
-//Redirct to signed-in page
-function redirectToSignedIn() {
-    window.location.href = "signed-in.html";
+    window.location.href = "/signup";
 }
 
 //Redirect to gameprep page
 function redirectToGamePrep() {
-    window.location.href = 'gameprep.html';
+    window.location.href = '/gameprep';
 }
 
 //Redirect to gamepage.html
 function redirectToGameScreen() {
-    window.location.href = 'gamepage.html';
+    window.location.href = '/gamepage';
 }
 
 function countdown(minutes) { //change parameter accordingly

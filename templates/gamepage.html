@@ -7,11 +7,11 @@
 {% block body %}
     <div id="game-container">
         <div id="left-image-container">
-            <iframe id="left-image" src="NinerNav/game.html" name="Game" allowTransparency="true" scrolling="no" frameborder="0">
+            <iframe id="left-image" src="NinerNav/game" name="Game" allowTransparency="true" scrolling="no" frameborder="0">
             </iframe>
         </div>
         <div id="right-container">
-            <iframe id="left-image" src="NinerNav/map.html" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
+            <iframe id="left-image" src="NinerNav/map" name="Map" allowTransparency="true" scrolling="no" frameborder="0">
             </iframe>
             
             <!-- <button id="guess-button">Guess</button> -->
@@ -27,17 +27,8 @@
             </div>
         </div>
         <!-- scipt that recieve the post message-->
-        <script>
-            function displayDistance(distance) {
-                document.getElementById("distance").innerHTML = "Distance: " + distance;
-                console.log("this is your distance" + distance);
-            }
-        </script>
-        <script>
-            function displayScore(score) {
-                document.getElementById("score").innerHTML = "Score: " + score;
-                console.log("this is the score" + score);
-            }
-        </script>
+        <script src="/static/components/gamepage.js"></script>
     </div>
+    <!-- Insert the CSRF token here, will be read by JavaScript -->
+    {{ form.csrf_token() }}
 {% endblock%}
