@@ -14,8 +14,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = secrets["dbconnection"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = secrets["sessionkey"]
 
-import server.session as session
+import server.controllers.session as session_controller
 import server.controllers.user as user_controller
+import server.controllers.game as game_controller
+
+# DEBUG, DO NOT KEEP
+from flask import session
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -25,7 +29,7 @@ def index():
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
         try:
-            user = session.login_user(request)
+            user = session_controller.login_user(request)
         except ValueError:
             return "Invalid info"
 
@@ -43,7 +47,7 @@ def signup():
     if form.validate_on_submit():
         # Attempt to sign the user up
         try:
-            new_user = session.signup_user(request)
+            new_user = session_controller.signup_user(request)
         except ValueError:
             return "Invalid info"
 
@@ -58,9 +62,20 @@ def signup():
 def gameprep():
     return render_template("gameprep.html")
 
-@app.get("/gamepage")
+@app.route("/gamepage", methods=["GET", "POST"])
 def gamepage():
-    return render_template("gamepage.html")
+    # Mark the game as started (STARTED)
+    game_controller.start_game()
+
+    form = game_controller.GPSForm()
+    if form.validate_on_submit():
+        # Move to the next state (SUBMITTED)
+        game_controller.next_state()
+
+        #return redirect(url_for("resultpage"))
+        return "ok"
+
+    return render_template("gamepage.html", form=form)
 
 @app.get("/NinerNav/game")
 def ninernav_game():
@@ -75,11 +90,29 @@ def leaderboard():
     return render_template("leaderboard.html")
 
 @app.get("/resultpage")
-def resultpate():
+def resultpage():
+    print(f"Requesting w/ state {session['gamestate']}")
+
+    # Require that the state be SUBMITTED
+    if not game_controller.is_in_state(game_controller.GameState.SUBMITTED):
+        return redirect(url_for("index"))
+
+    # TODO: Process submitted data, including database operations
+
+    # Move from SUBMITTED to PROCESSED
+    game_controller.next_state()
+
     return render_template("resultpage.html")
 
 @app.get("/endgame")
 def endgame():
+    # Require that the state be PROCESSED
+    if not game_controller.is_in_state(game_controller.GameState.PROCESSED):
+        return redirect(url_for("index"))
+
+    # Move from PROCESSED to FINISHED
+    game_controller.next_state()
+
     return render_template("end-game.html")
 
 @app.get("/favicon.ico")

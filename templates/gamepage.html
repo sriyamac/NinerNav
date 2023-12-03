@@ -21,10 +21,8 @@
         <div id="score"></div>
 
         <!-- scipt that recieve the post message-->
-        <script>
-            function displayScore(score) {
-                console.log(score);
-            }
-        </script>
+        <script src="/static/components/gamepage.js"></script>
     </div>
+    <!-- Insert the CSRF token here, will be read by JavaScript -->
+    {{ form.csrf_token() }}
 {% endblock%}
