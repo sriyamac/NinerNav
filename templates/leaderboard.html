@@ -7,22 +7,13 @@
 {% block body %}
     <div class="leaderboard-container">
         <div class="leaderboard">
-            <div class="leaderboard-entry">1. John - Score: 1000</div>
-            <div class="leaderboard-entry">2. Doe - Score: 950</div>
-            <div class="leaderboard-entry">3. Lane - Score: 900</div>
-            <div class="leaderboard-entry">4. Ben - Score: 850</div>
-            <div class="leaderboard-entry">5. Ronnie - Score: 800</div>
-            <div class="leaderboard-entry">6. Parth - Score: 750</div>
-            <div class="leaderboard-entry">7. Sriya - Score: 700</div>
-            <div class="leaderboard-entry">8. Joshua - Score: 650</div>
-            <div class="leaderboard-entry">9. Paul - Score: 600</div>
-            <div class="leaderboard-entry">10. Manny - Score: 550</div>
-
-            <!-- Add more entries with the "Load More" button -->
-            <!-- Change this part based on how we plan to load more entries (AJAX, JavaScript, etc) -->
+            {% for score in scores %}
+            <div class="leaderboard-entry">{{loop.index}}. {{ score[0] }} ({{ score[1] }}) - Score: {{ score[2] }}</div>
+            {% endfor %}
         </div>
-    
-        <!-- Load more button -->
+
+        <!-- Add more entries with the "Load More" button -->
+        <!-- Change this part based on how we plan to load more entries (AJAX, JavaScript, etc) -->
         <button class="load-more-btn">Load More</button>
     </div>
 {% endblock%}

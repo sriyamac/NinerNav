@@ -15,6 +15,7 @@ from flask import session
 from flask_wtf import FlaskForm
 from wtforms import FloatField
 from wtforms.validators import DataRequired
+from ..models import game as game_model
 
 class GameState(Enum):
     STARTED = 0
@@ -57,6 +58,20 @@ def is_in_state(state: GameState) -> bool:
     if "gamestate" not in session:
         return False
     return session["gamestate"] == state.value
+
+def get_leaderboard() -> list[tuple[str, str, int]]:
+    """Gets the current global leaderboard.
+
+    Returns:
+        A list of scores, where the first entry is a username, the second is a map name, and the
+        third is the score.
+    """
+    scores = game_model.get_top_scores()
+
+    # Filter for just the username, map name, and score
+    scores = [(s[0].username, s[1].name, s[2].score) for s in scores]
+
+    return scores
 
 class GPSForm(FlaskForm):
     latitude = FloatField("latitude", validators=[DataRequired()])

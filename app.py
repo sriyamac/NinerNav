@@ -23,15 +23,8 @@ import server.controllers.session as session_controller
 import server.controllers.user as user_controller
 import server.controllers.game as game_controller
 
-# DEBUG: remove later
-import server.models.game as game_model
-
 @app.route("/", methods=["GET", "POST"])
 def index():
-    # DEBUG: remove later
-    scores = game_model.get_user_scores_by_map('a', 'Null Island')
-    print(scores)
-
     form = user_controller.LoginForm()
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
@@ -100,7 +93,10 @@ def ninernav_map():
 
 @app.get("/leaderboard")
 def leaderboard():
-    return render_template("leaderboard.html")
+    # Get the leaderboard
+    scores = game_controller.get_leaderboard()
+
+    return render_template("leaderboard.html", scores=scores)
 
 @app.get("/resultpage")
 def resultpage():
