@@ -18,13 +18,8 @@ import server.controllers.session as session_controller
 import server.controllers.user as user_controller
 import server.controllers.game as game_controller
 
-# DEBUG, DO NOT KEEP
-from flask import session
-
 @app.route("/", methods=["GET", "POST"])
 def index():
-    """ form = user_controller.LoginForm()
-    return render_template("index.html", form=form) """
     form = user_controller.LoginForm()
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
@@ -34,11 +29,17 @@ def index():
             return "Invalid info"
 
         if user:
-            return "Signed in"
+            #return "Signed in"
+            pass
         else:
             return "Sign in failed"
-    # TODO: display errors based on exactly how the sign in attempt failed if need be
-    return render_template("index.html", form=form)
+
+    # Determine if the user is signed in
+    if session_controller.is_user_authenticated():
+        return render_template("newindex.html", is_authed=True)
+    else:
+        # TODO: display errors based on exactly how the sign in attempt failed if need be
+        return render_template("newindex.html", is_authed=False, form=form)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -91,8 +92,6 @@ def leaderboard():
 
 @app.get("/resultpage")
 def resultpage():
-    print(f"Requesting w/ state {session['gamestate']}")
-
     # Require that the state be SUBMITTED
     if not game_controller.is_in_state(game_controller.GameState.SUBMITTED):
         return redirect(url_for("index"))

@@ -39,6 +39,18 @@
                 </div>
             </div>
             <div class="col-md-2">
+            {% if is_authed %}
+                <div id="stats-container">
+                    <div class="stats-menu">
+                        <p class="stats-text hello"><b>Hello, {{ session['username'] }}!</b></p>
+                        <!-- Display user stats here -->
+                        <p class="stats-text">Average Accuracy: 85%</p>
+                        <p class="stats-text">Most Accurate: 95%</p>
+                        <p class="stats-text">Average Time: 30 seconds</p>
+                        <p class="stats-text">Fastest Time: 20 seconds</p>
+                    </div>
+                </div>
+            {% else %}
                 <div class = "container stats-menu">
                     <form action="/" method="POST">
                         <h1 class="text-center signin"><b>Sign In</b></h1>
@@ -52,6 +64,7 @@
                         <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
                     </form>
                 </div>
+            {% endif %}
             </div>
         </div>
         <div class="footer text-center">

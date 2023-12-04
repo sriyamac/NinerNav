@@ -79,14 +79,11 @@ def login_user(request: Request) -> models.User|None:
     # User is authenticated, return them
     return user
 
-def validate_user(request: Request) -> bool:
+def is_user_authenticated() -> bool:
     """Determines if a given request is authenticated.
 
     Based on the request's session, this function determines if the request should be treated as
     authenticated.
-
-    Args:
-        request: A flask.Request instance
 
     Returns:
         True if the request is authenticated
