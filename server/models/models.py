@@ -50,4 +50,5 @@ class Score(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.Integer, nullable=False)
     mapid = db.Column(db.Integer, nullable=False)
+    score = db.Column(db.Integer, nullable=False)
     time = db.Column(db.TIMESTAMP, nullable=False)

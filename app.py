@@ -5,6 +5,11 @@ app = Flask(__name__)
 # For debugging purposes, remove this during deployment
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
+# DEBUGGING ONLY, REMOVE BEFORE FINAL SUBMISSION
+# This disables HTTP only cookies, making them accessible via JavaScript
+# In turn, this makes session hijacking easier
+app.config['SESSION_COOKIE_HTTPONLY'] = False
+
 # Load secrets from disk
 with open("secrets/secrets.json") as f:
     secrets = json.loads(f.read())
@@ -18,8 +23,15 @@ import server.controllers.session as session_controller
 import server.controllers.user as user_controller
 import server.controllers.game as game_controller
 
+# DEBUG: remove later
+import server.models.game as game_model
+
 @app.route("/", methods=["GET", "POST"])
 def index():
+    # DEBUG: remove later
+    scores = game_model.get_user_scores_by_map('a', 'Null Island')
+    print(scores)
+
     form = user_controller.LoginForm()
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():

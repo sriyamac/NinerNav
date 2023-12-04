@@ -5,6 +5,7 @@ the session object are listed below.
 
 * authenticated (bool) - true if the user is authenticated, false otherwise
 * username (str) - the user's username
+* user_id (int) - the user's id in the database
 """
 from flask import Request, session
 from argon2 import PasswordHasher
@@ -75,6 +76,7 @@ def login_user(request: Request) -> models.User|None:
     # Mark the user's session as authenticated
     session["authenticated"] = True
     session["username"] = username
+    session["user_id"] = user.id
 
     # User is authenticated, return them
     return user

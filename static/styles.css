@@ -85,7 +85,7 @@ color: #CA2E55;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    padding-top: 10px;
 }
 .leaderboard {
     width: 70%;
