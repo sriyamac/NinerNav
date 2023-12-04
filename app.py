@@ -36,10 +36,10 @@ def index():
 
     # Determine if the user is signed in
     if session_controller.is_user_authenticated():
-        return render_template("newindex.html", is_authed=True)
+        return render_template("index.html", is_authed=True)
     else:
         # TODO: display errors based on exactly how the sign in attempt failed if need be
-        return render_template("newindex.html", is_authed=False, form=form)
+        return render_template("index.html", is_authed=False, form=form)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
