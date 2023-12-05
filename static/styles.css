@@ -130,7 +130,7 @@ color: #CA2E55;
 
 #left-image-container {
     flex: 1;
-    max-width: 80%; /* Adjust the max-width as needed */
+    max-width: 100%; /* Adjust the max-width as needed */
     padding: 50px; /* Adjust the padding as needed */
     box-sizing: border-box;
 }
