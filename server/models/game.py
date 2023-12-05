@@ -84,6 +84,18 @@ def get_map_by_name(map_name: str) -> Map|None:
     """
     return Map.query.filter(Map.name == map_name).first()
 
+def get_map_by_id(map_id: int) -> Map|None:
+    """Gets a map by its id if it exists.
+
+    Args:
+        map_id: The id of the map to fetch
+
+    Returns:
+        The map with the given id if such a map exists
+        None if no map has the given id
+    """
+    return Map.query.filter(Map.id == map_id).first()
+
 def _convert_user_to_obj(user: User|str) -> User|None:
     """Given either a User or a username, convert it to a User.
 

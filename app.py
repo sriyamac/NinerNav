@@ -19,6 +19,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = secrets["dbconnection"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = secrets["sessionkey"]
 
+from server.models.models import init_db
 import server.controllers.session as session_controller
 import server.controllers.user as user_controller
 import server.controllers.game as game_controller
@@ -48,6 +49,10 @@ def index():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    # Prevent access to page if already signed in
+    if session_controller.is_user_authenticated():
+        return redirect("/")
+
     form = user_controller.SignupForm()
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
@@ -78,7 +83,8 @@ def gamepage():
         # Move to the next state (SUBMITTED)
         game_controller.next_state()
 
-        #return redirect(url_for("resultpage"))
+        lat, long = form.latitude.data, form.longitude.data
+
         return "ok"
 
     return render_template("gamepage.html", form=form)
@@ -127,4 +133,5 @@ def favicon():
     return "", 404
 
 if __name__ == "__main__":
+    init_db(app)
     app.run()

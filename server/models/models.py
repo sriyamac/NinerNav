@@ -3,10 +3,10 @@
 This file holds models for all tables in the database. Database operations are handled elsewhere.
 """
 from flask_sqlalchemy import SQLAlchemy
-from app import app
+from flask import Flask
 
 # Set up SQLAlchemy
-db = SQLAlchemy(app)
+db = SQLAlchemy()
 
 class User(db.Model):
     """A model for the user table.
@@ -52,3 +52,12 @@ class Score(db.Model):
     mapid = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
     time = db.Column(db.TIMESTAMP, nullable=False)
+
+def init_db(app: Flask):
+    """Initialize the database connection. This must be called before any database operations are
+    performed.
+
+    Args:
+        app: The Flask app
+    """
+    db.init_app(app)
