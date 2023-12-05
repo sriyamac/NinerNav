@@ -2,7 +2,7 @@
 var gallery = [
     '/static/gallery/scene_0.png','/static/gallery/scene_1.png','/static/gallery/scene_2.png','/static/gallery/scene_3.png',
     '/static/gallery/scene_4.png','/static/gallery/scene_5.png','/static/gallery/scene_6.png','/static/gallery/scene_7.png',
-    '/static/gallery/scene_8.png','/static/gallery/scene_9.png','/static/gallery/scene_10.png','/static/gallery/scene_11.png',
+    '/static/gallery/scene_9.png','/static/gallery/scene_10.png','/static/gallery/scene_11.png',
     '/static/gallery/scene_12.png','/static/gallery/scene_13.png','/static/gallery/scene_14.png','/static/gallery/scene_15.png',
     '/static/gallery/scene_16.png','/static/gallery/scene_17.png'
 ];
