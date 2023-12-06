@@ -96,6 +96,9 @@ def get_map_by_id(map_id: int) -> Map|None:
     """
     return Map.query.filter(Map.id == map_id).first()
 
+def get_map_count() -> int:
+    return Map.query.count()
+
 def _convert_user_to_obj(user: User|str) -> User|None:
     """Given either a User or a username, convert it to a User.
 
