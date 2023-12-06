@@ -5,8 +5,9 @@
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
 </head>
 <body>
-    <a-scene>
+    <a-scene vr-mode-ui="enabled: false">
         <a-sky id="sky" src="" rotation="0 -130 0"></a-sky>
+        
         <button id="pause-button" onclick="pauseGame()">Pause</button>
 
         <a-text font="kelsonsans" value="Guess Where" width="6" position="-2.5 0.25 -1.5"
@@ -22,18 +23,34 @@
         </a-entity>
     </a-scene>
 
-    <div id="compass">
+    <!-- <div id="compass">
         <div class="row">
-            <button id="front" onclick="rotateCamera(0)">Front</button>
+            <button backgroundid="front" onclick="rotateCamera(0)">Front</button>
         </div>
         <div class="row">
-            <button id="left" onclick="rotateCamera(270)">Left</button>
+            <button img src="imgs/leftButton.png" title="Atkins" height="250"
+                id="left" onclick="rotateCamera(270)">Left</button>
             <div class="compass"></div>
             <button id="right" onclick="rotateCamera(90)">Right</button>
         </div>
         <div class="row">
             <button id="back" onclick="rotateCamera(180)">Back</button>
         </div>
+    </div> -->
+
+    <div id="compass">
+        <div class="row">
+
+            <img src="/static/images/leftButton.png" height="75px" width="75px" button id="B" onclick="rotateCamera(270)"></button>
+            <img src="/static/images/rightButton.png" height="75px" width="75px" button id="B" onclick="rotateCamera(90)"></button>
+
+        </div>
+    
+    
+
+
+        <!-- <img src="imgs/leftButton.png" title="Atkins" height="250"> -->
+
     </div>
 
     <button id="next-button" onclick="nextImage()">Next</button>
