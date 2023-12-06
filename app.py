@@ -132,6 +132,9 @@ def endgame():
 def favicon():
     return "", 404
 
-if __name__ == "__main__":
+with app.app_context():
     init_db(app)
+    game_controller.init_game_info()
+
+if __name__ == "__main__":
     app.run()

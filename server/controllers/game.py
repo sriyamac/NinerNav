@@ -15,6 +15,7 @@ from flask import session
 from flask_wtf import FlaskForm
 from wtforms import FloatField
 from wtforms.validators import DataRequired
+from typing import Dict, Any
 from ..models import game as game_model
 
 class GameState(Enum):
@@ -22,6 +23,25 @@ class GameState(Enum):
     SUBMITTED = 1
     PROCESSED = 2
     FINISHED = 3
+
+gameinfo: Dict[str, Any] = {}
+
+def init_game_info() -> Dict[str, Any]:
+    """Initializes some information about the game.
+
+    This should be called on server start. The information this function obtains is stored in the
+    global gameinfo dict. The keys set in gameinfo are listed below.
+
+    * num_maps - the number of maps available to be played
+
+    Returns:
+        A reference to the gameinfo object
+    """
+    gameinfo["num_maps"] = game_model.get_map_count()
+    print(gameinfo["num_maps"])
+    print("HELLO")
+
+    return gameinfo
 
 def start_game():
     """Initializes the gamestate key in flask's session to STARTED."""
