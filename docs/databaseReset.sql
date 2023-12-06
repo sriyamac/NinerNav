@@ -40,9 +40,24 @@ VALUES
 
 INSERT INTO map (name, longitude, latitude, imgpath)
 VALUES
-	('Null Island', 0, 0, '/dev/null'),
-    ('Full Island', 1, 1, '/dev/full'),
-    ('Random Island', 0.4019647391215304, 0.830638956196776, '/dev/urandom');
+    ("Image 0", 35.306330, -80.733399, "/static/gallery/scene_0.png"),
+    ("Image 1", 35.305407, -80.731238, "/static/gallery/scene_1.png"),
+    ("Image 2", 35.305578, -80.730922, "/static/gallery/scene_2.png"),
+    ("Image 3", 35.306295, -80.729552, "/static/gallery/scene_3.png"),
+    ("Image 4", 35.306756, -80.731305, "/static/gallery/scene_4.png"),
+    ("Image 5", 35.30579736934577, -80.73230173858936, "/static/gallery/scene_5.png"),
+    ("Image 6", 35.302603, -80.732805, "/static/gallery/scene_6.png"),
+    ("Image 7", 35.301666, -80.735723, "/static/gallery/scene_7.png"),
+    ("Image 8", 0, 0, "/static/gallery/scene_8.png"), -- TODO: get better coords
+    ("Image 9", 0, 0, "/static/gallery/scene_9.png"), -- TODO: get better coords
+    ("Image 10", 35.305415, -80.729257, "/static/gallery/scene_10.png"),
+    ("Image 11", 35.307246, -80.733724, "/static/gallery/scene_11.png"),
+    ("Image 12", 35.307113, -80.734777, "/static/gallery/scene_12.png"),
+    ("Image 13", 35.308008, -80.733728, "/static/gallery/scene_13.png"),
+    ("Image 14", 35.30579213372453, -80.73231173069534, "/static/gallery/scene_14.png"),
+    ("Image 15", 35.3067350, -80.7303750, "/static/gallery/scene_15.png"),
+    ("Image 16", 35.3084017, -80.7291050, "/static/gallery/scene_16.png"),
+    ("Image 17", 35.3082800, -80.7278133, "/static/gallery/scene_17.png");
 
 INSERT INTO score (userid, mapid, score)
 VALUES
