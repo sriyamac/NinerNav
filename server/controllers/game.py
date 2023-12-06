@@ -1,14 +1,12 @@
 """A set of functions to manage the state of the game and determine which page the user should be at
 given their progression in the game.
 
-As the user advances through the game, their state should also progress. Certain pages may only be
-accessed when the user's state is at a certain value. The state should be stored in flask's session
-under the "gamestate" key. Those values are enumerated below.
+This file interacts with flask's session object. The keys that may be modified by this file are
+listed below.
 
-* STARTED - a game has been started, typically triggered by visiting the game prep page
-* SUBMITTED - a game has been submitted to the server but has not yet been processed
-* PROCESSED - the submitted game has been processed by the server
-* FINISHED - the user has indicated that they wish to end the game
+* gamestate - the current state of the game that the user is in, one of GameState's values
+* map_order - the order in which the user is going to progress through maps
+* map_index - the index of the next map that the user should play
 """
 from enum import Enum
 from flask import session
@@ -16,7 +14,8 @@ from flask_wtf import FlaskForm
 from wtforms import FloatField
 from wtforms.validators import DataRequired
 from typing import Dict, Any
-from ..models import game as game_model
+import random
+from ..models import game as game_model, models
 
 class GameState(Enum):
     STARTED = 0
@@ -38,14 +37,26 @@ def init_game_info() -> Dict[str, Any]:
         A reference to the gameinfo object
     """
     gameinfo["num_maps"] = game_model.get_map_count()
-    print(gameinfo["num_maps"])
-    print("HELLO")
 
     return gameinfo
 
 def start_game():
-    """Initializes the gamestate key in flask's session to STARTED."""
+    """Initializes several variables for the user's game.
+
+    Certain pages may only be accessed when the user's gamestate is a certain value, listed below.
+    To make sure that repeated maps are not served, the order that the user will play the maps in is
+    generated at the started and stored for the duration of the session.
+
+    * STARTED - a game has been started, typically triggered by visiting the game prep page
+    * SUBMITTED - a game has been submitted to the server but has not yet been processed
+    * PROCESSED - the submitted game has been processed by the server
+    * FINISHED - the user has indicated that they wish to end the game
+    """
     session["gamestate"] = GameState.STARTED.value
+
+    # Check if a map order does not exist or if all maps have been cycled through, regen if so
+    if "map_order" not in session or session["map_index"] == gameinfo["num_maps"]:
+        _reset_maps()
 
 def next_state():
     """Moves the current value of gamestate to the next possible GameState.
@@ -92,6 +103,32 @@ def get_leaderboard() -> list[tuple[str, str, int]]:
     scores = [(s[0].username, s[1].name, s[2].score) for s in scores]
 
     return scores
+
+def get_next_map() -> models.Map:
+    """Gets the next map that the user should play. Also increments the map index and regenerates
+    the map order if necessary.
+
+    Returns:
+        The next map that the user should play
+    """
+    map_index = session["map_index"]
+    map = game_model.get_map_by_id(session["map_order"][map_index])
+    map_index += 1
+
+    if map_index == gameinfo["num_maps"]:
+        _reset_maps()
+    else:
+        session["map_index"] = map_index
+
+    return map
+
+def _reset_maps():
+    """Resets the map order and index for the current session. This should be called when all maps
+    have been exhausted.
+    """
+    num_maps = gameinfo["num_maps"]
+    session["map_order"] = random.sample([i+1 for i in range(num_maps)], num_maps)
+    session["map_index"] = 0
 
 class GPSForm(FlaskForm):
     latitude = FloatField("latitude", validators=[DataRequired()])

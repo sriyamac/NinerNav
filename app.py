@@ -91,7 +91,8 @@ def gamepage():
 
 @app.get("/NinerNav/game")
 def ninernav_game():
-    return render_template("NinerNav/game.html")
+    map = game_controller.get_next_map()
+    return render_template("NinerNav/game.html", image_path="/static/gallery/scene_0.png")
 
 @app.get("/NinerNav/map")
 def ninernav_map():

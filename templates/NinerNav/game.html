@@ -6,13 +6,7 @@
 </head>
 <body>
     <a-scene vr-mode-ui="enabled: false">
-        <a-sky id="sky" src="" rotation="0 -130 0"></a-sky>
-        
-        <!-- <button id="pause-button" onclick="pauseGame()">Pause</button> -->
-
-        <!-- <a-text font="kelsonsans" value="Guess Where" width="6" position="-2.5 0.25 -1.5"
-                rotation="0 15 0"></a-text> -->
-
+        <a-sky id="sky" src="{{ image_path }}" rotation="0 0 0"></a-sky>
         <a-entity id="rig"
                   movement-controls
                   position="0 0 0">
@@ -22,55 +16,12 @@
             </a-entity>
         </a-entity>
     </a-scene>
-
-    <!-- <div id="compass">
-        <div class="row">
-            <button backgroundid="front" onclick="rotateCamera(0)">Front</button>
-        </div>
-        <div class="row">
-            <button img src="imgs/leftButton.png" title="Atkins" height="250"
-                id="left" onclick="rotateCamera(270)">Left</button>
-            <div class="compass"></div>
-            <button id="right" onclick="rotateCamera(90)">Right</button>
-        </div>
-        <div class="row">
-            <button id="back" onclick="rotateCamera(180)">Back</button>
-        </div>
-    </div> -->
-
     <div id="compass">
         <div class="row">
-
-            <img src="/static/images/leftButton.png" height="100px" width="100px" button id="B" onclick="rotateCamera(270)"></button>
-            <img src="/static/images/rightButton.png" height="100px" width="100px" button id="B" onclick="rotateCamera(90)"></button>
-
+            <img src="/static/images/leftButton.png" height="100px" width="100px" button id="B" onclick="rotateCamera(-45)"></button>
+            <img src="/static/images/rightButton.png" height="100px" width="100px" button id="B" onclick="rotateCamera(45)"></button>
         </div>
-    
-    
-
-
-        <!-- <img src="imgs/leftButton.png" title="Atkins" height="250"> -->
-
     </div>
-
-    <!-- <button id="next-button" onclick="nextImage()">Next</button> -->
-<!-- 
-    <div id="pause-menu">
-        <button onclick="resumeGame()">Resume</button>
-        <button onclick="loadGame()">Load</button>
-        <button onclick="saveGame()">Save</button>
-        <button onclick="restartGame()">Restart</button>
-        <button onclick="openSettings()">Settings</button> 
-        <button onclick="quitGame()">Quit</button> 
-        <button onclick="returnToMainMenu()">Main Menu</button>
-        <div>
-            <label for="volume">Volume:</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" onchange="changeVolume(this.value)">
-        </div>
-    </div> -->
-
-
-
     <script src="/static/components/gamescripts.js"></script>
 </body>
 </html>
