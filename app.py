@@ -83,7 +83,7 @@ def gamepage():
         # Move to the next state (SUBMITTED)
         game_controller.next_state()
 
-        lat, long = form.latitude.data, form.longitude.data
+        game_controller.calculate_score(form)
 
         return "ok"
 
@@ -92,7 +92,7 @@ def gamepage():
 @app.get("/NinerNav/game")
 def ninernav_game():
     map = game_controller.get_next_map()
-    return render_template("NinerNav/game.html", image_path="/static/gallery/scene_0.png")
+    return render_template("NinerNav/game.html", image_path=map.imgpath)
 
 @app.get("/NinerNav/map")
 def ninernav_map():

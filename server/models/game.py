@@ -3,41 +3,41 @@ from sqlalchemy import desc
 from .models import db, User, Map, Score
 from .user import get_user_by_username
 
-def get_user_scores(user: User|str) -> list[Score]|None:
+def get_user_scores(user: User|str|int) -> list[Score]|None:
     """Gets all of the specified user's scores.
 
     Args:
-        user: A User object or the username of a user
+        user: A User object, the username of a user, or a user's id
 
     Returns:
         A list of all scores belonging to the specified user
     """
     # Ensure the user is a User
-    user = _convert_user_to_obj(user)
+    user_id = _convert_user_to_id(user)
 
-    return Score.query.filter(Score.userid == user.id).all()
+    return Score.query.filter(Score.userid == user_id).all()
 
-def get_user_scores_by_map(user: User|str, map: Map|str) -> list[Score]|None:
+def get_user_scores_by_map(user: User|str|int, map: Map|str|int) -> list[Score]|None:
     """Gets all of the specified user's scores for a specific map.
 
     Args:
-        user: A User object or the username of a user
-        map: A Map object or the name of a map
+        user: A User object, the username of a user, or a user's id
+        map: A Map object, the name of a map, or a map's id
 
     Returns:
         A list of all scores belonging to the specified user
     """
     # Ensure the user is a User
-    user = _convert_user_to_obj(user)
+    user_id = _convert_user_to_id(user)
     if user == None:
         return None
 
     # Get the map's id
-    map = _convert_map_to_obj(map)
-    if map == None:
+    map_id = _convert_map_to_obj(map)
+    if map_id == None:
         return None
 
-    return Score.query.filter(Score.userid == user.id, Score.mapid == map.id).all()
+    return Score.query.filter(Score.userid == user_id, Score.mapid == map_id).all()
 
 def get_top_scores(num_scores: int=10) -> list[tuple[User, Map, Score]]:
     """Gets the top num_scores scores.
@@ -52,21 +52,21 @@ def get_top_scores(num_scores: int=10) -> list[tuple[User, Map, Score]]:
             desc(Score.score)
         ).limit(num_scores).all()
 
-def register_score(user: User|str, map: Map|str, score: int) -> Score:
+def register_score(user: User|str|int, map: Map|str|int, score: int) -> Score:
     """Register a new score for a given user on a given map.
 
     Args:
-        user: A User object or the username of a user
+        user: A User object, the username of a user, or a user's id
         map: A Map object or the name of a map
         score: The score that the user achieved on the given map
 
     Returns:
         The newly registered score
     """
-    user = _convert_user_to_obj(user)
-    map = _convert_map_to_obj(map)
+    user_id = _convert_user_to_id(user)
+    map_id = _convert_map_to_obj(map)
 
-    new_score = Score(userid=user.id, mapid=map.id, score=score)
+    new_score = Score(userid=user_id, mapid=map_id, score=score)
     db.session.add(new_score)
     db.session.commit()
 
@@ -99,30 +99,38 @@ def get_map_by_id(map_id: int) -> Map|None:
 def get_map_count() -> int:
     return Map.query.count()
 
-def _convert_user_to_obj(user: User|str) -> User|None:
+def _convert_user_to_id(user: User|str|int) -> int|None:
     """Given either a User or a username, convert it to a User.
 
     Args:
-        user: Either a username as a str or a User object
+        user: A User object, the username of a user, or a user's id
 
     Returns:
-        The corresponding User object or None if no such user exists
+        The corresponding user id or None if no such user exists
     """
     if type(user) == str:
-        return get_user_by_username(user)
+        user = get_user_by_username(user)
+        if user != None:
+            return user.id
+    elif type(user) == User:
+        return user.id
 
     return user
 
-def _convert_map_to_obj(map: Map|str) -> Map|None:
+def _convert_map_to_obj(map: Map|str|int) -> Map|None:
     """Given either a Map or a map name, convert it to a Map.
 
     Args:
-        map: Either a map name as a str or a Map object
+        map: A Map object, the name of a map, or a map's id
 
     Returns:
         The corresponding Map object or None if no such map exists
     """
     if type(map) == str:
-        return get_map_by_name(map)
+        map = get_map_by_name(map)
+        if map != None:
+            return map.id
+    elif type(map) == Map:
+        return map.id
 
     return map
