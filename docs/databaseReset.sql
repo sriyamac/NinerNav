@@ -25,7 +25,7 @@ CREATE TABLE score (
 	userid		MEDIUMINT UNSIGNED NOT NULL,
     mapid		SMALLINT UNSIGNED NOT NULL,
     score		SMALLINT NOT NULL,
-    time		TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    time		TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (userid) REFERENCES user(id),
     FOREIGN KEY (mapid) REFERENCES map(id)
@@ -38,7 +38,7 @@ VALUES
 	('b', 'b@example.com', '$argon2id$v=19$m=65536,t=3,p=4$raLdPgfD+krGBUoXoSFaVA$r26NkGLYAjDI4Bc9TEN6Usqz3RJ3P9LheAgv+VpUtHc'),
     ('c', 'c@example.com', '$argon2id$v=19$m=65536,t=3,p=4$EuVxKIUDNsmY/ENHfiARzQ$TM8+SXlbdsL50wZ4hXcQzVwgguVq9GAXm0p7bQwHw2M');
 
-INSERT INTO map (name, longitude, latitude, imgpath)
+INSERT INTO map (name, latitude, longitude, imgpath)
 VALUES
     ("Image 0", 35.306330, -80.733399, "/static/gallery/scene_0.png"),
     ("Image 1", 35.305407, -80.731238, "/static/gallery/scene_1.png"),
@@ -48,8 +48,7 @@ VALUES
     ("Image 5", 35.30579736934577, -80.73230173858936, "/static/gallery/scene_5.png"),
     ("Image 6", 35.302603, -80.732805, "/static/gallery/scene_6.png"),
     ("Image 7", 35.301666, -80.735723, "/static/gallery/scene_7.png"),
-    ("Image 8", 0, 0, "/static/gallery/scene_8.png"), -- TODO: get better coords
-    ("Image 9", 0, 0, "/static/gallery/scene_9.png"), -- TODO: get better coords
+    ("Image 8", 35.30286732802698,-80.73509417677259, "/static/gallery/scene_8.png"),
     ("Image 10", 35.305415, -80.729257, "/static/gallery/scene_10.png"),
     ("Image 11", 35.307246, -80.733724, "/static/gallery/scene_11.png"),
     ("Image 12", 35.307113, -80.734777, "/static/gallery/scene_12.png"),

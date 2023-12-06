@@ -4,6 +4,7 @@ This file holds models for all tables in the database. Database operations are h
 """
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from sqlalchemy.sql import func
 
 # Set up SQLAlchemy
 db = SQLAlchemy()
@@ -51,7 +52,7 @@ class Score(db.Model):
     userid = db.Column(db.Integer, nullable=False)
     mapid = db.Column(db.Integer, nullable=False)
     score = db.Column(db.Integer, nullable=False)
-    time = db.Column(db.TIMESTAMP, nullable=False)
+    time = db.Column(db.TIMESTAMP, nullable=False, server_default=func.now(), onupdate=func.now())
 
 def init_db(app: Flask):
     """Initialize the database connection. This must be called before any database operations are

@@ -1,9 +1,6 @@
 // Called by the map iframe to communicate the submitted coordinates, which are forwarded to the
 // server.
 function sendCoords(lat, long) {
-    console.log(lat);
-    console.log(long);
-
     // Get the CSRF token
     let token = document.querySelector("#csrf_token").value;
 
