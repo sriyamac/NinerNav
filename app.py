@@ -91,6 +91,14 @@ def ninernav_game():
 def ninernav_map():
     return render_template("NinerNav/map.html")
 
+@app.get("/NinerNav/result")
+def ninernav_result():
+    return render_template("NinerNav/result.html")
+
+@app.get("/NinerNav/guess")
+def ninernav_guess():
+  return render_template("NinerNav/guess.html")
+
 @app.get("/leaderboard")
 def leaderboard():
     # Get the leaderboard
