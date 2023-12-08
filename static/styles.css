@@ -179,6 +179,7 @@ color: #CA2E55;
     display: flex;
     justify-content: space-between;
     padding: 20px;
+    
 }
 
 .image-container {
@@ -186,6 +187,7 @@ color: #CA2E55;
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    
 }
 
 .image-container img {
@@ -368,11 +370,13 @@ color: #CA2E55;
 /* Stats menu styling */
 .stats-menu {
     width: fit-content;
+    max-width: 330px;
     background-color: #333333;
     border: 2px solid #333;
     border-radius: 8px;
     color: white;
     padding: 10px;
+
 }
 
 /* Stats text */
