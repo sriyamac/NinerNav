@@ -20,13 +20,18 @@
         </div>
 
         <div class="fun-facts">
-            <div class="title">Fun Facts of Location</div>
-            <p>Add interesting facts about the location here.</p>
+            <p>
+                {{ session["map_desc"] }}
+            </p>
         </div>
     </div>
 
     <div class="footer text-center action-buttons">
-        <button type="button" class="btn btn-success btn-lg mb-3" id="go">Next Location</button>
-        <button type="button" class="btn btn-success btn-lg mb-3" id="go">End Game</button>
+        <a href="/gamepage">
+            <button type="button" class="btn btn-success btn-lg mb-3" id="go">Next Location</button>
+        </a>
+        <a href="/endgame">
+            <button type="button" class="btn btn-success btn-lg mb-3" id="go">End Game</button>
+        </a>
     </div>
 {% endblock%}

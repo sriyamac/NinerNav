@@ -11,7 +11,6 @@ from flask import Request, session
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from sqlalchemy.exc import IntegrityError
-import re
 from ..models import user as user_model, models
 
 _ph = PasswordHasher()
@@ -80,6 +79,10 @@ def login_user(request: Request) -> models.User|None:
 
     # User is authenticated, return them
     return user
+
+def signout_user():
+    """Signs out the current user, if a user is signed in."""
+    session.clear()
 
 def is_user_authenticated() -> bool:
     """Determines if a given request is authenticated.

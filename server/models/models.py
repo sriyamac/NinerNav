@@ -38,6 +38,7 @@ class Map(db.Model):
     latitude = db.Column(db.Numeric, nullable=False)
     longitude = db.Column(db.Numeric, nullable=False)
     imgpath = db.Column(db.String(100), unique=True, nullable=False)
+    description = db.Column(db.String(500), nullable=False)
 
 class Score(db.Model):
     """A model for the score table.

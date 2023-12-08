@@ -5,11 +5,6 @@ app = Flask(__name__)
 # For debugging purposes, remove this during deployment
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
-# DEBUGGING ONLY, REMOVE BEFORE FINAL SUBMISSION
-# This disables HTTP only cookies, making them accessible via JavaScript
-# In turn, this makes session hijacking easier
-app.config['SESSION_COOKIE_HTTPONLY'] = False
-
 # Load secrets from disk
 with open("secrets/secrets.json") as f:
     secrets = json.loads(f.read())
@@ -41,11 +36,9 @@ def index():
             return "Sign in failed"
 
     # Determine if the user is signed in
-    if session_controller.is_user_authenticated():
-        return render_template("index.html", is_authed=True)
-    else:
-        # TODO: display errors based on exactly how the sign in attempt failed if need be
-        return render_template("index.html", is_authed=False, form=form)
+    # TODO: display errors based on exactly how the sign in attempt failed if need be
+    return render_template("index.html", is_authed=session_controller.is_user_authenticated(),
+        form=form)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -111,8 +104,6 @@ def resultpage():
     if not game_controller.is_in_state(game_controller.GameState.SUBMITTED):
         return redirect(url_for("index"))
 
-    # TODO: Process submitted data, including database operations
-
     # Move from SUBMITTED to PROCESSED
     game_controller.next_state()
 
@@ -128,6 +119,13 @@ def endgame():
     game_controller.next_state()
 
     return render_template("end-game.html")
+
+@app.route("/signout", methods=["GET", "POST"])
+def signout():
+    form = user_controller.SignoutForm()
+    if form.validate_on_submit():
+        session_controller.signout_user()
+    return redirect("/")
 
 @app.get("/favicon.ico")
 def favicon():

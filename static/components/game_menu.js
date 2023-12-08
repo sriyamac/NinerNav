@@ -10,19 +10,7 @@ const difficultySubButtons = document.getElementById('difficultySubButtons');
         }
     });
 
-const gameButton = document.getElementById('gameButton');
 const gameModeSubButtons = document.getElementById('gameModeSubButtons');
-
-gameButton.addEventListener('click', function() {
-    if (gameModeSubButtons.style.display === 'none') {
-        gameModeSubButtons.style.display = 'block';
-    } else {
-        gameModeSubButtons.style.display = 'none';
-    }
-});
-
-
-
 
 // Redirect to leaderboard page
 function redirectToLeaderboard() {
@@ -62,31 +50,3 @@ function countdown(minutes) { //change parameter accordingly
     }
     tick();
 }
-
-//display user information
-// function displayUserInfo() {
-//     //locally stored user info for now, need DB in future
-//     const userInfo = localStorage.getItem("userInfo");
-
-//     //display functionality 
-//     if (userInfo) {
-//         const userInfoLines = userInfo.split(', ').join('<br>'); //formating, creating separate lines for each user credential 
-//         document.getElementById("displayUserInfo").innerHTML = `<h4>User Info:</h4><p>${userInfoLines}</p>`;
-//     } else {
-//         document.getElementById("displayUserInfo").innerText = "No user info available.";
-//     }
-// }
-
-//when page loads, automatically displays user info
-// displayUserInfo();
-
-// //redirect to game screen 
-// function redirectToGameScreen() {
-//     //if the user is logged in, then go button is functional
-//     const userInfo = localStorage.getItem("userInfo");
-//     if (userInfo) {
-//         window.location.href = "gamescreen.html";
-//     } else {
-//         alert("Please login/signup first.");
-//     }
-// }

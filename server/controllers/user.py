@@ -6,7 +6,6 @@ wherever possible.
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, ValidationError
 from wtforms.validators import DataRequired, length, Regexp
-import wtforms.validators as validators
 
 def _is_valid_email(form, field):
     """Determines if a given email is valid.
@@ -51,3 +50,7 @@ class SignupForm(FlaskForm):
     username = StringField("username", validators=[DataRequired(), length(max=100)])
     email = StringField("email", validators=[DataRequired(), _is_valid_email])
     password = PasswordField("password", validators=[DataRequired(), length(min=12), Regexp(".*[A-Z].*"), Regexp(".*[a-z].*")])
+
+# Intentionally empty form, still uses wtforms' CSRF protection
+class SignoutForm(FlaskForm):
+    pass

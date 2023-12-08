@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get all images
         const images = document.querySelectorAll("#imageSlider img");
 
+        if (images === undefined) {
+            return;
+        }
+
         let currentIndex = 0;
 
         // Show the first image

@@ -12,6 +12,7 @@ listed below.
 * map_name - the name of the current map
 * map_score - the score the user achieved on the current map this game
 * map_id - the id of the current map in the database
+* map_desc - the description of the current map
 """
 from enum import Enum
 from flask import session
@@ -143,6 +144,7 @@ def get_next_map() -> models.Map:
     session["map_lon"] = map.longitude
     session["map_name"] = map.name
     session["map_id"] = map.id
+    session["map_desc"] = map.description
 
     return map
 
