@@ -13,6 +13,8 @@ listed below.
 * map_score - the score the user achieved on the current map this game
 * map_id - the id of the current map in the database
 * map_desc - the description of the current map
+* guess_lat - the latitude of the most recent guess
+* guess_lon - the longitude of the most recent guess
 """
 from enum import Enum
 from flask import session
@@ -152,7 +154,8 @@ def calculate_score(form: GPSForm):
     """Calculates and stores a user's score for the game in the map_score key in the user's session
     and in the database.
 
-    The user's session must have the correct coordinates for the current map stored.
+    The user's session must have the correct coordinates for the current map stored. The user's
+    guess is stored in the session under "guess_lat" and "guess_lng".
 
     Arguments:
         form: The GPSForm that the user submitted
@@ -160,6 +163,9 @@ def calculate_score(form: GPSForm):
     Returns:
         The user's score, which is an integer in the range [0, 100]
     """
+    session["guess_lat"] = form.latitude.data
+    session["guess_lon"] = form.longitude.data
+
     dist = _haversine(
         form.latitude.data,
         form.longitude.data,

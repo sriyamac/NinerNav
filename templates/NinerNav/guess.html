@@ -2,12 +2,13 @@
 <html>
   <head>
     <title>guessed location</title>
-    <script src="/static/components/guess.js"></script>
+    <script src="/static/components/show_results.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAaoKs6guvxaniF7SoxZFgKdvE1bL986vE&callback=initMap&libraries=geometry" async defer></script>
     <link rel="stylesheet" href="/static/map.css">
   </head>
   <body>
     <div id="map" style="height:100%;"></div>
-    
+    <input id="lat" value="{{ session['guess_lat'] }}" hidden>
+    <input id="lng" value="{{ session['guess_lon'] }}" hidden>
   </body>
 </html>
