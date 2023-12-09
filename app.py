@@ -82,7 +82,7 @@ def gamepage():
 
     return render_template("gamepage.html", form=form)
 
-@app.get("/NinerNav/game")
+@app.get("/NinerNav/game/")
 def ninernav_game():
     map = game_controller.get_next_map()
     return render_template("NinerNav/game.html", image_path=map.imgpath)
@@ -120,11 +120,12 @@ def resultpage():
 @app.get("/endgame")
 def endgame():
     # Require that the state be PROCESSED
-    if not game_controller.is_in_state(game_controller.GameState.PROCESSED):
-        return redirect(url_for("index"))
+    """ if not game_controller.is_in_state(game_controller.GameState.PROCESSED):
+        return redirect(url_for("index")) """
 
     # Move from PROCESSED to FINISHED
     game_controller.next_state()
+    game_controller.reset_run()
 
     return render_template("end-game.html")
 

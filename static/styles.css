@@ -405,3 +405,13 @@ color: #CA2E55;
     padding-right: 190px;
     padding-bottom: 330px
 }
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* #endpoints {
+    margin-left: auto;
+    margin-right: auto;
+} */

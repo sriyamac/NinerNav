@@ -15,6 +15,10 @@ listed below.
 * map_desc - the description of the current map
 * guess_lat - the latitude of the most recent guess
 * guess_lon - the longitude of the most recent guess
+* total_score - the cumulative score the user has accumulated this play session
+* old_total_score - the cumulative score for the user's previous attempt
+* games_played - the number of games a user played in a given run
+* old_games_played - the number of games played in the user's previous attempt
 """
 from enum import Enum
 from flask import session
@@ -67,6 +71,12 @@ def start_game():
     * FINISHED - the user has indicated that they wish to end the game
     """
     session["gamestate"] = GameState.STARTED.value
+
+    if "total_score" not in session:
+        session["total_score"] = 0
+
+    if "games_played" not in session:
+        session["games_played"] = 0
 
     # Check if a map order does not exist or if all maps have been cycled through, regen if so
     if "map_order" not in session or session["map_index"] == gameinfo["num_maps"]:
@@ -166,6 +176,8 @@ def calculate_score(form: GPSForm):
     session["guess_lat"] = form.latitude.data
     session["guess_lon"] = form.longitude.data
 
+    session["games_played"] += 1
+
     dist = _haversine(
         form.latitude.data,
         form.longitude.data,
@@ -176,6 +188,7 @@ def calculate_score(form: GPSForm):
     # Arbitrary sigmoid function, returns non-zero value if within 52 meters of the actual location
     score = int(200 * (1 + ((-1)/(1 + exp(-dist/10)))))
     session["map_score"] = score
+    session["total_score"] += score
 
     # Register a new score in the database if the user is authenticated
     if session_controller.is_user_authenticated():
@@ -184,6 +197,17 @@ def calculate_score(form: GPSForm):
             session["map_id"],
             score
         )
+
+def reset_run():
+    """Resets the user's statistics for the run.
+
+    Also moves the current stats into old_* keys.
+    """
+    session["old_total_score"] = session["total_score"]
+    session["total_score"] = 0
+
+    session["old_games_played"] = session["games_played"]
+    session["games_played"] = 0
 
 def _reset_maps():
     """Resets the map order and index for the current session. This should be called when all maps

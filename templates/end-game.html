@@ -17,20 +17,13 @@
                         <button type="button" class="btn btn-success sub-btn">Expert</button>
                     </div>
 
-                    <!-- Change Game Mode Button -->
-                    <!-- <button type="button" class="btn btn-success mt-3 main-btn" id="gameButton">Change Game Mode</button>
-                    <div id="gameModeSubButtons" style="display: none;">
-                        <button type="button" class="btn btn-success sub-btn">Regular</button>
-                        <button type="button" class="btn btn-success sub-btn">Timed</button>
-                        <button type="button" class="btn btn-success sub-btn">Sight Seeing</button>
-                    </div> -->
-
                     <!-- View Leaderboard Button -->
                     <button type="button" class="btn btn-success mt-3" onclick="redirectToLeaderboard()">View LeaderBoard</button>
                 </div>
             </div>
             <div class=" col-md-6">
-                <h1 class="text-center mb-3 stats-menu">50 Points Earned</h1>
+                <h1 class="text-center mb-3 stats-menu center">{{ session["old_total_score"] }} Points Earned</h1>
+                <p class="text-center mb-3 stats-menu center">{{ session["old_games_played"] }} Games Played</p>
                 <div class=slider-style>
                 <img src="static/images/homepage_bench.jpg" title="Bench" class="img-fluid" alt="Bench Image">
                 </div>
@@ -44,7 +37,7 @@
                             width="300" height="300" 
                             frameborder="0" marginheight="0" 
                             marginwidth="0">Loading…</iframe>
-                            
+
                     </form>
                 </div>
             </div>
@@ -52,7 +45,9 @@
     </div>
 
     <div class="footer text-center">
-        <button type="button" class="btn btn-success btn-lg mb-3">Start New Game</button>
+        <a href="/gamepage?reset=True">
+            <button type="button" class="btn btn-success btn-lg mb-3">Start New Game</button>
+        </a>
     </div>
 
     <script src="static/components/game_menu.js"></script>
