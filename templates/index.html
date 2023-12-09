@@ -18,7 +18,9 @@
                     </div>
 
                     <!-- View Leaderboard Button -->
-                    <button type="button" class="btn btn-success mt-3" onclick="redirectToLeaderboard()">View LeaderBoard</button> 
+                    <a href="/leaderboard">
+                        <button type="button" class="btn btn-success mt-3">View LeaderBoard</button>
+                    </a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -35,9 +37,6 @@
                 <div id="stats-container">
                     <div class="stats-menu">
                         <p class="stats-text hello"><b>Hello, {{ session['username'] }}!</b></p>
-                        <!-- Display user stats here -->
-                        <!-- <p class="stats-text">Average Accuracy: 85%</p>
-                        <p class="stats-text">Most Accurate: 95%</p> -->
                         {% if stats != None %}
                         <p class="stats-text">Best Score: {{ stats[0] }}</p>
                         <p class="stats-text">Average Score: {{ stats[1] }}</p>
@@ -55,20 +54,26 @@
                     <form action="/" method="POST">
                         <h1 class="text-center signin"><b>Sign In</b></h1>
                         {{ form.csrf_token }}
-                        <input type="text" class="form-control mt-3" placeholder="Username" id="usename" name="username">
-                        <input type="password" class="form-control mt-3" placeholder="Password" id="password" name="password">
+                        <input type="text" class="form-control mt-3" placeholder="Username" id="usename" name="username" required>
+                        <input type="password" class="form-control mt-3" placeholder="Password" id="password" name="password" required>
                         <button type="submit" class="btn btn-secondary mt-3" id="signInButton">Sign In</button>
 
-                        <h4 class="text-center" style="padding-top: 20px;">------------</h4>
+                        {% if error_occured %}
+                        <p class="small">{{ error }}</p>
+                        {% endif %}
 
-                        <button type="button" class="btn btn-secondary mt-3" id="signupButton" onclick="redirectToSignUp()">Sign Up</button>
+                        <a href="/signup">
+                            <button type="button" class="btn btn-secondary mt-3" id="signupButton">Sign Up</button>
+                        </a>
                     </form>
                 </div>
             {% endif %}
             </div>
         </div>
         <div class="footer text-center">
-        <button type="button" class="btn btn-success btn-lg mb-3" id="go" onclick="redirectToGamePrep()">Go</button>
+            <a href="/gameprep">
+                <button type="button" class="btn btn-success btn-lg mb-3" id="go">Go</button>
+            </a>
         </div>
     </div>
     <script src="static/components/game_menu.js"></script>

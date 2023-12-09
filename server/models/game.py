@@ -1,7 +1,7 @@
 """Contains functions for game functions, such as logging scores and getting level data."""
 from sqlalchemy import desc, func
 from .models import db, User, Map, Score
-from .user import get_user_by_username
+from . import user as user_model
 
 def get_user_scores(user: User|str|int) -> list[Score]|None:
     """Gets all of the specified user's scores.
@@ -13,7 +13,7 @@ def get_user_scores(user: User|str|int) -> list[Score]|None:
         A list of all scores belonging to the specified user
     """
     # Ensure the user is a User
-    user_id = _convert_user_to_id(user)
+    user_id = user_model.convert_user_to_id(user)
     if user_id == None:
         return None
 
@@ -30,7 +30,7 @@ def get_user_scores_by_map(user: User|str|int, map: Map|str|int) -> list[Score]|
         A list of all scores belonging to the specified user
     """
     # Ensure the user is a User
-    user_id = _convert_user_to_id(user)
+    user_id = user_model.convert_user_to_id(user)
     if user_id == None:
         return None
 
@@ -50,7 +50,7 @@ def get_top_user_score(user: User|str|int) -> int|None:
     Returns:
         The user's top score or None if the user does not exist or they have no scores
     """
-    user_id = _convert_user_to_id(user)
+    user_id = user_model.convert_user_to_id(user)
     if user_id == None:
         return None
 
@@ -65,7 +65,7 @@ def get_avg_user_score(user: User|str|int) -> float|None:
     Returns:
         The user's average score or None if the user does not exist or they have no scores
     """
-    user_id = _convert_user_to_id(user)
+    user_id = user_model.convert_user_to_id(user)
     if user_id == None:
         return None
 
@@ -95,15 +95,19 @@ def register_score(user: User|str|int, map: Map|str|int, score: int) -> Score:
     Returns:
         The newly registered score
     """
-    user_id = _convert_user_to_id(user)
+    user_id = user_model.convert_user_to_id(user)
     map_id = _convert_map_to_obj(map)
 
     if user_id == None or map_id == None:
         return None
 
-    new_score = Score(userid=user_id, mapid=map_id, score=score)
-    db.session.add(new_score)
-    db.session.commit()
+    try:
+        new_score = Score(userid=user_id, mapid=map_id, score=score)
+        db.session.add(new_score)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
 
     return new_score
 
@@ -133,24 +137,6 @@ def get_map_by_id(map_id: int) -> Map|None:
 
 def get_map_count() -> int:
     return Map.query.count()
-
-def _convert_user_to_id(user: User|str|int) -> int|None:
-    """Given either a User or a username, convert it to a User.
-
-    Args:
-        user: A User object, the username of a user, or a user's id
-
-    Returns:
-        The corresponding user id or None if no such user exists
-    """
-    if type(user) == str:
-        user = get_user_by_username(user)
-        if user != None:
-            return user.id
-    elif type(user) == User:
-        return user.id
-
-    return user
 
 def _convert_map_to_obj(map: Map|str|int) -> Map|None:
     """Given either a Map or a map name, convert it to a Map.

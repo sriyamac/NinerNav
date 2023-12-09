@@ -22,23 +22,24 @@ import server.controllers.game as game_controller
 @app.route("/", methods=["GET", "POST"])
 def index():
     form = user_controller.LoginForm()
+    error_occured = False
+    error = ""
+
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
         try:
             user = session_controller.login_user(request)
         except ValueError:
-            return "Invalid info"
-
-        if user:
-            #return "Signed in"
-            pass
+            error_occured = True
+            error = "An unknown error occured. Please try again."
         else:
-            return "Sign in failed"
+            if user == None:
+                error_occured = True
+                error = "Incorrect username or password."
 
     # Determine if the user is signed in
-    # TODO: display errors based on exactly how the sign in attempt failed if need be
     return render_template("index.html", is_authed=session_controller.is_user_authenticated(),
-        form=form, stats=game_controller.get_user_stats())
+        form=form, stats=game_controller.get_user_stats(), error_occured=error_occured, error=error)
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -47,20 +48,27 @@ def signup():
         return redirect("/")
 
     form = user_controller.SignupForm()
+    error_occured = False
+    error = ""
+
     # If a form was submitted (i.e., this is a POST) and was valid, this check passes
     if form.validate_on_submit():
         # Attempt to sign the user up
         try:
             new_user = session_controller.signup_user(request)
         except ValueError:
-            return "Invalid info"
-
-        if new_user:
-            return redirect(url_for("index"))
+            error_occured = True
+            error = user_controller.find_user_failure_reason(request).value
         else:
-            return "Users already existed"
-    # TODO: display errors based on exactly how the sign up attempt failed if need be
-    return render_template("sign-up.html", form=form)
+            if new_user == None:
+                error_occured = True
+                error = user_controller.find_user_failure_reason(request).value
+    else:
+        if request.method == "POST":
+            error_occured = True
+            error = user_controller.find_user_failure_reason(request).value
+
+    return render_template("sign-up.html", form=form, error_occured=error_occured, error=error)
 
 @app.get("/gameprep")
 def gameprep():
@@ -120,8 +128,8 @@ def resultpage():
 @app.get("/endgame")
 def endgame():
     # Require that the state be PROCESSED
-    """ if not game_controller.is_in_state(game_controller.GameState.PROCESSED):
-        return redirect(url_for("index")) """
+    if not game_controller.is_in_state(game_controller.GameState.PROCESSED):
+        return redirect(url_for("index"))
 
     # Move from PROCESSED to FINISHED
     game_controller.next_state()

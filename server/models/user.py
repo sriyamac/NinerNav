@@ -22,9 +22,13 @@ def create_user(username: str, email: str, hash: str) -> User:
     Raises:
         sqlalchemy.exc.IntegrityError: the username or email already correspond to an account
     """
-    new_user = User(username=username, email=email, password=hash)
-    db.session.add(new_user)
-    db.session.commit()
+    try:
+        new_user = User(username=username, email=email, password=hash)
+        db.session.add(new_user)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
 
     return new_user
 
@@ -40,6 +44,18 @@ def get_user_by_username(username: str) -> User|None:
     """
     return User.query.filter_by(username=username).first()
 
+def get_user_by_email(email: str) -> User|None:
+    """Gets a user by their email if they exist.
+
+    Args:
+        email: The email of the user to fetch
+
+    Returns:
+        The user with the given email if such a user exists
+        None if no user has the given email
+    """
+    return User.query.filter_by(email=email).first()
+
 def update_user_password(user: User, hash: str):
     """Updates a user's password with the newly provided hash.
 
@@ -52,3 +68,21 @@ def update_user_password(user: User, hash: str):
     """
     user.password = hash
     db.session.commit()
+
+def convert_user_to_id(user: User|str|int) -> int|None:
+    """Given either a User or a username, convert it to a User.
+
+    Args:
+        user: A User object, the username of a user, or a user's id
+
+    Returns:
+        The corresponding user id or None if no such user exists
+    """
+    if type(user) == str:
+        user = get_user_by_username(user)
+        if user != None:
+            return user.id
+    elif type(user) == User:
+        return user.id
+
+    return user

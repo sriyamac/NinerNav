@@ -411,7 +411,6 @@ color: #CA2E55;
     margin-right: auto;
 }
 
-/* #endpoints {
-    margin-left: auto;
-    margin-right: auto;
-} */
+.small {
+    font-size: small;
+}

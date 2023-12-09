@@ -6,18 +6,78 @@ wherever possible.
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, ValidationError
 from wtforms.validators import DataRequired, length, Regexp
+from enum import Enum
+from flask import Request
+import re
+from ..models import user as user_model
 
-def _is_valid_email(form, field):
+class FailureReason(Enum):
+    UNKNOWN = "An unknown error has occured. Please try again."
+    LONG_USERNAME = "Your username must be less than 100 characters."
+    LONG_EMAIL = "Your email must be less than 100 charcters."
+    BAD_EMAIL = "Your email is invalid. Please try again."
+    SHORT_PASSWORD = "Your password must be at least 12 characters."
+    NO_UPPER_PASSWORD = "Your password must have at least one uppercase character."
+    NO_LOWER_PASSWORD = "Your password must have at least one lowercase character."
+    DUPE_USERNAME = "Your username is already in use."
+    DUPE_EMAIL = "Your email is already in use."
+
+def find_user_failure_reason(request: Request) -> FailureReason:
+    """Determines the reason that a user signup failed.
+
+    This function assumes that the signup failed. If it succeeded, this function will return
+    UNKNOWN.
+    """
+    username = request.form.get("username")
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    # Do non-db checks first
+    if len(username) > 100:
+        return FailureReason.LONG_USERNAME
+
+    if len(email) > 100:
+        return FailureReason.LONG_EMAIL
+
+    try:
+        _is_valid_email(email)
+    except ValidationError:
+        return FailureReason.BAD_EMAIL
+
+    if len(password) < 12:
+        return FailureReason.SHORT_PASSWORD
+
+    # No uppercase character
+    if not re.match(".*[A-Z].*", password):
+        return FailureReason.NO_UPPER_PASSWORD
+
+    # No lowercase character
+    if not re.match(".*[a-z].*", password):
+        return FailureReason.NO_LOWER_PASSWORD
+
+    # Check db for failure reasons
+    if user_model.get_user_by_username(username) != None:
+        return FailureReason.DUPE_USERNAME
+
+    if user_model.get_user_by_email(email) != None:
+        return FailureReason.DUPE_EMAIL
+
+    return FailureReason.UNKNOWN
+
+def _is_valid_email(value: FlaskForm|str, field=None):
     """Determines if a given email is valid.
 
     Args:
-        form: The form that is being validated
+        value: The SignupForm that is being validated or an email as a str
         field: The field that is being validated
 
     Raises:
         wtforms.ValidationError: the provided field did not contain a valid email
     """
-    email = field.data
+    if type(value) == SignupForm:
+        email = field.data
+    else:
+        email = value
 
     # Verify that exactly one '@' is present
     if email.count("@") != 1:
@@ -48,7 +108,7 @@ class LoginForm(FlaskForm):
 
 class SignupForm(FlaskForm):
     username = StringField("username", validators=[DataRequired(), length(max=100)])
-    email = StringField("email", validators=[DataRequired(), _is_valid_email])
+    email = StringField("email", validators=[DataRequired(), length(max=100), _is_valid_email])
     password = PasswordField("password", validators=[DataRequired(), length(min=12), Regexp(".*[A-Z].*"), Regexp(".*[a-z].*")])
 
 # Intentionally empty form, still uses wtforms' CSRF protection
