@@ -36,8 +36,14 @@
                     <div class="stats-menu">
                         <p class="stats-text hello"><b>Hello, {{ session['username'] }}!</b></p>
                         <!-- Display user stats here -->
-                        <p class="stats-text">Average Accuracy: 85%</p>
-                        <p class="stats-text">Most Accurate: 95%</p>
+                        <!-- <p class="stats-text">Average Accuracy: 85%</p>
+                        <p class="stats-text">Most Accurate: 95%</p> -->
+                        {% if stats != None %}
+                        <p class="stats-text">Best Score: {{ stats[0] }}</p>
+                        <p class="stats-text">Average Score: {{ stats[1] }}</p>
+                        {% else %}
+                        <p class="">Play some games to see some stats here!</p>
+                        {% endif %}
                         <form method="POST" action="/signout">
                             {{ form.csrf_token }}
                             <button class="btn btn-secondary mt-3" type="submit">Sign Out</button>

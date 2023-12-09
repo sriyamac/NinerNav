@@ -38,7 +38,7 @@ def index():
     # Determine if the user is signed in
     # TODO: display errors based on exactly how the sign in attempt failed if need be
     return render_template("index.html", is_authed=session_controller.is_user_authenticated(),
-        form=form)
+        form=form, stats=game_controller.get_user_stats())
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():

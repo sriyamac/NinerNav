@@ -209,6 +209,28 @@ def reset_run():
     session["old_games_played"] = session["games_played"]
     session["games_played"] = 0
 
+def get_user_stats() -> tuple[int, float]|None:
+    """Gets various statistics about the current user.
+
+    Returns:
+        The user's best and average score as a tuple or None if the user hasn't played any games or
+        is not signed in.
+    """
+    if not session_controller.is_user_authenticated():
+        return None
+
+    # Get the top score
+    top_score = game_model.get_top_user_score(session["user_id"])
+
+    # If no top score exists, no need to query the DB again since no max means no scores
+    if top_score == None:
+        return None
+
+    avg_score = game_model.get_avg_user_score(session["user_id"])
+
+    # If top_score exists, then avg_will always exist as well
+    return (top_score, float(avg_score))
+
 def _reset_maps():
     """Resets the map order and index for the current session. This should be called when all maps
     have been exhausted.

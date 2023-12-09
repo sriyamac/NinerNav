@@ -1,5 +1,5 @@
 """Contains functions for game functions, such as logging scores and getting level data."""
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 from .models import db, User, Map, Score
 from .user import get_user_by_username
 
@@ -14,6 +14,8 @@ def get_user_scores(user: User|str|int) -> list[Score]|None:
     """
     # Ensure the user is a User
     user_id = _convert_user_to_id(user)
+    if user_id == None:
+        return None
 
     return Score.query.filter(Score.userid == user_id).all()
 
@@ -29,7 +31,7 @@ def get_user_scores_by_map(user: User|str|int, map: Map|str|int) -> list[Score]|
     """
     # Ensure the user is a User
     user_id = _convert_user_to_id(user)
-    if user == None:
+    if user_id == None:
         return None
 
     # Get the map's id
@@ -38,6 +40,36 @@ def get_user_scores_by_map(user: User|str|int, map: Map|str|int) -> list[Score]|
         return None
 
     return Score.query.filter(Score.userid == user_id, Score.mapid == map_id).all()
+
+def get_top_user_score(user: User|str|int) -> int|None:
+    """Gets the user's top score.
+
+    Args:
+        user: A User object, the username of a user, or a user's id
+
+    Returns:
+        The user's top score or None if the user does not exist or they have no scores
+    """
+    user_id = _convert_user_to_id(user)
+    if user_id == None:
+        return None
+
+    return db.session.query(func.max(Score.score)).filter(Score.userid == user_id).first()[0]
+
+def get_avg_user_score(user: User|str|int) -> float|None:
+    """Gets the user's average score.
+
+    Args:
+        user: A User object, the username of a user, or a user's id
+
+    Returns:
+        The user's average score or None if the user does not exist or they have no scores
+    """
+    user_id = _convert_user_to_id(user)
+    if user_id == None:
+        return None
+
+    return db.session.query(func.avg(Score.score)).filter(Score.userid == user_id).first()[0]
 
 def get_top_scores(num_scores: int=10) -> list[tuple[User, Map, Score]]:
     """Gets the top num_scores scores.
@@ -65,6 +97,9 @@ def register_score(user: User|str|int, map: Map|str|int, score: int) -> Score:
     """
     user_id = _convert_user_to_id(user)
     map_id = _convert_map_to_obj(map)
+
+    if user_id == None or map_id == None:
+        return None
 
     new_score = Score(userid=user_id, mapid=map_id, score=score)
     db.session.add(new_score)
