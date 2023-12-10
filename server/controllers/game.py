@@ -29,7 +29,7 @@ from wtforms import FloatField
 from wtforms.validators import DataRequired
 from typing import Dict, Any, Self
 import random
-from math import radians, cos, sin, asin, sqrt, exp
+from math import radians, cos, sin, asin, sqrt, exp, floor
 from . import session as session_controller
 from ..models import game as game_model, models
 
@@ -203,7 +203,8 @@ def calculate_score(form: GPSForm):
     )
 
     # Arbitrary sigmoid function, returns non-zero value if within 52 meters of the actual location
-    score = int(200 * (1 + ((-1)/(1 + exp(-dist/10)))))
+    score = int(200 * (1 + ((-1)/(1 + exp(-(dist-5)/30)))))
+    score = floor(min(score, 100))
     session["map_score"] = score
     session["total_score"] += score
 
