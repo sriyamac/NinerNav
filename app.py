@@ -14,9 +14,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = secrets["dbconnection"]
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = secrets["sessionkey"]
 
-# TODO: reenable HTTP only cookies
-app.config["SESSION_COOKIE_HTTPONLY"] = False
-
 from server.models.models import init_db
 import server.controllers.session as session_controller
 import server.controllers.user as user_controller
