@@ -16,6 +16,7 @@ engaging, immersive, and educational experience that turns acclimation into an a
 1. Install the packages in `requirements.txt` (preferably in a virtual environment).
 2. Make a folder called `secrets` and place a file called `secrets.json` in it.
 3. In `secrets.json`, you should place you database connection string and session signing key.
+Optionally, you may use the sqlite database in `tests/ninernav.db`.
 
 ```json
 {
@@ -24,5 +25,7 @@ engaging, immersive, and educational experience that turns acclimation into an a
 }
 ```
 
-4. Optionally, run `docs/databaseReset.sql` in your database of choice to generate sample data.
-5. Run the application with `flask run` or `python app.py`.
+4. If you did not use `tests/ninernav.db`, you must execute `tests/minimal.sql` to insert map data.
+5. Optionally, run `docs/databaseReset.sql` as well to get additional test data, including users and
+score.
+6. Run the application with `flask run` or `python app.py`.
