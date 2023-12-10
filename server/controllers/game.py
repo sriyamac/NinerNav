@@ -19,13 +19,15 @@ listed below.
 * old_total_score - the cumulative score for the user's previous attempt
 * games_played - the number of games a user played in a given run
 * old_games_played - the number of games played in the user's previous attempt
+* num_maps - the number of maps available to be played
+* diff - the difficulty selected by the player (BEGINNER, MEDIUM, EXPERT)
 """
 from enum import Enum
 from flask import session
 from flask_wtf import FlaskForm
 from wtforms import FloatField
 from wtforms.validators import DataRequired
-from typing import Dict, Any
+from typing import Dict, Any, Self
 import random
 from math import radians, cos, sin, asin, sqrt, exp
 from . import session as session_controller
@@ -36,6 +38,20 @@ class GameState(Enum):
     SUBMITTED = 1
     PROCESSED = 2
     FINISHED = 3
+
+class Difficulty(Enum):
+    BEGINNER = 0
+    MEDIUM = 1
+    EXPERT = 2
+
+    def str_to_enum(s: str) -> Self:
+        match s:
+            case "Medium":
+                return Difficulty.MEDIUM
+            case "Expert":
+                return Difficulty.EXPERT
+            case _:
+                return Difficulty.BEGINNER
 
 gameinfo: Dict[str, Any] = {}
 
@@ -58,7 +74,7 @@ def init_game_info() -> Dict[str, Any]:
 
     return gameinfo
 
-def start_game():
+def start_game(request):
     """Initializes several variables for the user's game.
 
     Certain pages may only be accessed when the user's gamestate is a certain value, listed below.
@@ -71,6 +87,7 @@ def start_game():
     * FINISHED - the user has indicated that they wish to end the game
     """
     session["gamestate"] = GameState.STARTED.value
+    session["diff"] = Difficulty.str_to_enum(request.cookies.get("diff")).value
 
     if "total_score" not in session:
         session["total_score"] = 0
@@ -79,7 +96,7 @@ def start_game():
         session["games_played"] = 0
 
     # Check if a map order does not exist or if all maps have been cycled through, regen if so
-    if "map_order" not in session or session["map_index"] == gameinfo["num_maps"]:
+    if "map_order" not in session or session["map_index"] == gameinfo["num_maps"][session["diff"]]:
         _reset_maps()
 
 def next_state():
@@ -143,10 +160,10 @@ def get_next_map() -> models.Map:
         The next map that the user should play
     """
     map_index = session["map_index"]
-    map = game_model.get_map_by_id(session["map_order"][map_index])
+    map = game_model.get_map_by_difficulty(session["diff"], session["map_order"][map_index])
     map_index += 1
 
-    if map_index == gameinfo["num_maps"]:
+    if map_index == gameinfo["num_maps"][session["diff"]]:
         _reset_maps()
     else:
         session["map_index"] = map_index
@@ -235,8 +252,8 @@ def _reset_maps():
     """Resets the map order and index for the current session. This should be called when all maps
     have been exhausted.
     """
-    num_maps = gameinfo["num_maps"]
-    session["map_order"] = random.sample([i+1 for i in range(num_maps)], num_maps)
+    num_maps = gameinfo["num_maps"][session["diff"]]
+    session["map_order"] = random.sample([i for i in range(num_maps)], num_maps)
     session["map_index"] = 0
 
 def _haversine(lat1, lon1, lat2, lon2) -> float:

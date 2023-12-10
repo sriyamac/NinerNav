@@ -70,7 +70,7 @@ text-decoration: none;
 font-weight: bold;
 transition: all 0.3s ease-in-out;
 }
-a:hover 
+a:hover
 {
 color: #19847f;
 text-decoration: underline;
@@ -413,4 +413,8 @@ color: #CA2E55;
 
 .small {
     font-size: small;
+}
+
+.selected {
+    background-color: #28a745;
 }

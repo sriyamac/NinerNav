@@ -1,6 +1,15 @@
 /* to hide subbuttons until user clicks on main button */
-const difficultyButton = document.getElementById('difficultyButton');
-const difficultySubButtons = document.getElementById('difficultySubButtons');
+document.addEventListener("DOMContentLoaded", () => {
+    // Default to easy levels
+    let diff = getCookie("diff");
+    if (diff) {
+        setDifficulty(diff);
+    } else {
+        setDifficulty("Beginner");
+    }
+
+    const difficultyButton = document.getElementById('difficultyButton');
+    const difficultySubButtons = document.getElementById('difficultySubButtons');
 
     difficultyButton.addEventListener('click', function() {
         if (difficultySubButtons.style.display === 'none') {
@@ -10,43 +19,28 @@ const difficultySubButtons = document.getElementById('difficultySubButtons');
         }
     });
 
-const gameModeSubButtons = document.getElementById('gameModeSubButtons');
+    for (let child of difficultySubButtons.children) {
+        child.addEventListener("click", function () {
+            setDifficulty(this.innerHTML);
+        });
+    }
+});
 
-// Redirect to leaderboard page
-function redirectToLeaderboard() {
-    window.location.href = "/leaderboard";
+// Based on https://stackoverflow.com/a/15724300
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
 }
 
-//Redirct to login page
-function redirectToSignUp() {
-    window.location.href = "/signup";
-}
+function setDifficulty(diff) {
+    document.cookie = `diff=${diff}`;
 
-//Redirect to gameprep page
-function redirectToGamePrep() {
-    window.location.href = '/gameprep';
-}
-
-//Redirect to gamepage.html
-function redirectToGameScreen() {
-    window.location.href = '/gamepage';
-}
-
-function countdown(minutes) { //change parameter accordingly
-    var seconds = 60;
-    var mins = minutes
-    function tick() {
-        var counter = document.getElementById("counter"); //attached to id counter
-        var current_minutes = mins-1
-        seconds--;
-        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        if( seconds > 0 ) {
-            setTimeout(tick, 1000);
+    for (let child of document.querySelector("#difficultySubButtons").children) {
+        if (child.innerHTML != diff) {
+            child.classList.remove("selected");
         } else {
-            if(mins > 1){
-                countdown(mins-1);           
-            }
+            child.classList.add("selected");
         }
     }
-    tick();
 }

@@ -135,8 +135,21 @@ def get_map_by_id(map_id: int) -> Map|None:
     """
     return Map.query.filter(Map.id == map_id).first()
 
-def get_map_count() -> int:
-    return Map.query.count()
+def get_map_by_difficulty(difficulty: int, index: int) -> Map|None:
+    """Gets the index-th map with the specified difficulty.
+
+    Args:
+        difficulty: The difficulty of the map, as seen in the Difficulty enum in game_controller
+        index: The index of the map with the given difficult that should be selected, 0-indexed
+    """
+    res = Map.query.filter(Map.difficulty == difficulty).all()
+    if res == None or len(res) <= index:
+        return None
+    return res[index]
+
+def get_map_count() -> list[int]:
+    res = db.session.query(func.count(Map.difficulty)).group_by(Map.difficulty).all()
+    return [e[0] for e in res]
 
 def _convert_map_to_obj(map: Map|str|int) -> Map|None:
     """Given either a Map or a map name, convert it to a Map.
