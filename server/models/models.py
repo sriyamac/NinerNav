@@ -21,7 +21,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    password = db.Column(db.String(77), nullable=False)
+    password = db.Column(db.String(97), nullable=False)
 
 class Map(db.Model):
     """A model for the map table.
@@ -35,8 +35,8 @@ class Map(db.Model):
     """
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), unique=True, nullable=False)
-    latitude = db.Column(db.Numeric, nullable=False)
-    longitude = db.Column(db.Numeric, nullable=False)
+    latitude = db.Column(db.Double, nullable=False)
+    longitude = db.Column(db.Double, nullable=False)
     imgpath = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.String(500), nullable=False)
     difficulty = db.Column(db.Numeric, nullable=False)
@@ -64,3 +64,4 @@ def init_db(app: Flask):
         app: The Flask app
     """
     db.init_app(app)
+    db.create_all()

@@ -2,7 +2,7 @@
 
 {% block head %}
     <title>NinerNav | Game Page</title>
-{% endblock%}
+{% endblock %}
 
 {% block body %}
     <div id="game-container">
@@ -19,5 +19,5 @@
         <script src="/static/components/gamepage.js"></script>
     </div>
     <!-- Insert the CSRF token here, will be read by JavaScript -->
-    {{ form.csrf_token() }}
-{% endblock%}
+    {{ form.csrf_token }}
+{% endblock %}

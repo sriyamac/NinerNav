@@ -32,6 +32,18 @@ def create_user(username: str, email: str, hash: str) -> User:
 
     return new_user
 
+def get_user_by_id(id: int) -> User|None:
+    """Gets a user by their id if they exist.
+
+    Args:
+        id: The id of the user to fetch
+
+    Returns:
+        The user with the given id if such a user exists
+        None if no user has the given id
+    """
+    return User.query.filter_by(id=id).first()
+
 def get_user_by_username(username: str) -> User|None:
     """Gets a user by their username if they exist.
 
@@ -70,7 +82,7 @@ def update_user_password(user: User, hash: str):
     db.session.commit()
 
 def convert_user_to_id(user: User|str|int) -> int|None:
-    """Given either a User or a username, convert it to a User.
+    """Given either a User or a username, convert it to a User's id.
 
     Args:
         user: A User object, the username of a user, or a user's id

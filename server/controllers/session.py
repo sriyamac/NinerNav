@@ -52,6 +52,10 @@ def login_user(request: Request) -> models.User|None:
         The user if the login was successful
         None if the login was unsuccessful
     """
+    # If user is already authenticated, return that user
+    if is_user_authenticated():
+        return user_model.get_user_by_id(session["user_id"])
+
     # Get the username and password
     username = request.form.get("username")
     password = request.form.get("password")

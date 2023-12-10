@@ -26,7 +26,7 @@ from enum import Enum
 from flask import session
 from flask_wtf import FlaskForm
 from wtforms import FloatField
-from wtforms.validators import DataRequired
+from wtforms.validators import InputRequired
 from typing import Dict, Any, Self
 import random
 from math import radians, cos, sin, asin, sqrt, exp, floor
@@ -56,8 +56,10 @@ class Difficulty(Enum):
 gameinfo: Dict[str, Any] = {}
 
 class GPSForm(FlaskForm):
-    latitude = FloatField("latitude", validators=[DataRequired()])
-    longitude = FloatField("longitude", validators=[DataRequired()])
+    class Meta:
+        csrf = True
+    latitude = FloatField("latitude", validators=[InputRequired()])
+    longitude = FloatField("longitude", validators=[InputRequired()])
 
 def init_game_info() -> Dict[str, Any]:
     """Initializes some information about the game.

@@ -63,6 +63,8 @@ def signup():
             if new_user == None:
                 error_occured = True
                 error = user_controller.find_user_failure_reason(request).value
+            else:
+                return redirect("/")
     else:
         if request.method == "POST":
             error_occured = True
@@ -137,7 +139,7 @@ def endgame():
 
     return render_template("end-game.html")
 
-@app.route("/signout", methods=["GET", "POST"])
+@app.post("/signout")
 def signout():
     form = user_controller.SignoutForm()
     if form.validate_on_submit():
