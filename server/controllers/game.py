@@ -89,7 +89,12 @@ def start_game(request):
     * FINISHED - the user has indicated that they wish to end the game
     """
     session["gamestate"] = GameState.STARTED.value
-    session["diff"] = Difficulty.str_to_enum(request.cookies.get("diff")).value
+
+    # If the difficulty has changed, regenerate the maps
+    new_diff = Difficulty.str_to_enum(request.cookies.get("diff")).value
+    if "diff" not in session or new_diff != session["diff"]:
+        session["diff"] = new_diff
+        _reset_maps()
 
     if "total_score" not in session:
         session["total_score"] = 0
