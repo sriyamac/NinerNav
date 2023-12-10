@@ -2,9 +2,6 @@ from flask import Flask, render_template, request, redirect, url_for
 import json
 app = Flask(__name__)
 
-# For debugging purposes, remove this during deployment
-app.config["TEMPLATES_AUTO_RELOAD"] = True
-
 # Load secrets from disk
 with open("secrets/secrets.json") as f:
     secrets = json.loads(f.read())
