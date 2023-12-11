@@ -1,7 +1,8 @@
 # NinerNav
 
 <p>Group: 12</p>
-<p>Joshua Higgins, Parth Patel, Paul Warner, Sriya Machunuri, Manny Merino</p>
+<p>Joshua Higgins (Jah109Fc), Parth Patel (parth448812), Paul Warner (lucror1), Sriya Machunuri
+(sriyamac), Manny Merino (G00NSIE)</p>
 
 ## Product Vision:
 <p>NinerNav is FOR new and prospective UNCC students WHO want to learn more about the layout of and
@@ -11,6 +12,11 @@ diverse sites and locations on campus that they might not have visited yet. UNLI
 PRODUCT is specifically designed around the UNCC campus, making it the perfect tool for new UNC
 Charlotte students who are eager to explore and get acclimated to the campus. NinerNav provides an
 engaging, immersive, and educational experience that turns acclimation into an adventure.</p>
+
+## Note:
+Joshua Higgins (Jah109Fc) worked on the project, but due to a him not being a contributor and a
+technical glitch, none of his commits show up under the contributors tab. Examples of his commits
+include dcfd2a3, e7a6541, and ba0068e.
 
 ## Requirements:
 1. Install the packages in `requirements.txt` (preferably in a virtual environment).
