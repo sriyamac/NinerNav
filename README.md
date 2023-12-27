@@ -1,4 +1,4 @@
-# NinerNav
+# NinerNav (ITSC 3155 Final Project)
 
 <p>Group: 12</p>
 <p>Joshua Higgins (Jah109Fc), Parth Patel (parth448812), Paul Warner (lucror1), Sriya Machunuri
